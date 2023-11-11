@@ -2,7 +2,7 @@
 
 Делитесь чем-то новым, общайтесь и обсуждайте! 
 
-![Dart CI](https://github.com/hammsterr/Luna/workflows/Dart%20CI/badge.svg) ![GitHub pull requests](https://img.shields.io/github/issues-pr/hammsterr/Luna) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/hammsterr/Luna) ![GitHub last commit](https://img.shields.io/github/last-commit/hammsterr/Luna)  ![GitHub issues](https://img.shields.io/github/issues-raw/hammsterr/Luna) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/hammsterr/Luna) 
+![GitHub pull requests](https://img.shields.io/github/issues-pr/hammsterr/Luna) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/hammsterr/Luna) ![GitHub last commit](https://img.shields.io/github/last-commit/hammsterr/Luna)  ![GitHub issues](https://img.shields.io/github/issues-raw/hammsterr/Luna) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/hammsterr/Luna) 
 
 <a href="https://github.com/Solido/awesome-flutter#top">
    <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" />

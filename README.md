@@ -47,6 +47,10 @@
 
 ## Скриншоты
 
+
+<details>
+     <summary> Спойлер </summary>
+
 Welcome Page               |  Login Page               | Signup Page               |  Forgot Password Page
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/hammsterr/Luna/blob/master/screenshots/Auth/screenshot_1.jpg?raw=true)|![](https://github.com/hammsterr/Luna/blob/master/screenshots/Auth/screenshot_2.jpg?raw=true)|![](https://github.com/hammsterr/Luna/blob/master/screenshots/Auth/screenshot_3.jpg?raw=true)|![](https://github.com/hammsterr/Luna/blob/master/screenshots/Auth/screenshot_4.jpg?raw=true)|
@@ -93,7 +97,7 @@ Content Prefrences Page      |  Display Setting Page    |  Data Settings Page   
 ![](https://github.com/hammsterr/Luna/blob/master/screenshots/TweetDetail/screenshot_7.jpg?raw=true)|![](https://github.com/hammsterr/Luna/blob/master/screenshots/Settings/screenshot_9.jpg?raw=true)|![](https://github.com/hammsterr/Luna/blob/master/screenshots/Settings/screenshot_10.jpg?raw=true)|![](https://github.com/hammsterr/Luna/blob/master/screenshots/Settings/screenshot_81.jpg?raw=true)|
 
 
-
+</details>
 
 
 ## Начало 

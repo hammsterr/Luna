@@ -1,4 +1,4 @@
-## Luna - just a new simple social network [![GitHub stars](https://img.shields.io/github/stars/hammsterr/Luna?style=social)](https://github.com/login?return_to=%2Fhammsterr%Luna) ![GitHub forks](https://img.shields.io/github/forks/hammsterr/Luna?style=social) 
+## Luna - простая соцсеть [![GitHub stars](https://img.shields.io/github/stars/hammsterr/Luna?style=social)](https://github.com/login?return_to=%2Fhammsterr%Luna) ![GitHub forks](https://img.shields.io/github/forks/hammsterr/Luna?style=social) 
 
 Делитесь чем-то новым, общайтесь и обсуждайте! 
 
@@ -16,10 +16,13 @@
 * Функционал приложения [здесь](https://github.com/TheAlphamerc/flutter_twitter_clone/projects/1)
 * Messaging chat section status can be seen at [here](https://github.com/TheAlphamerc/flutter_twitter_clone/projects/2)
 
+
+<details>
+   <summary> еще кое что... </summary>
  :boom: Fwitter app now uses both firebase `realtime` and `firestore` database.:boom:
 * In branch **firetore** Fwitter uses `Firestore` database for app. 
 * In branch **Master** and **realtime_db** Fwitter uses `Firebase Realtime` database for app.
-
+</details>
 
 ## Зависимости
 <details>

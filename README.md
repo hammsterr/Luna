@@ -73,6 +73,7 @@ Content Prefrences Page      |  Display Setting Page    |  Data Settings Page   
 
 ## Сборка 
 * Инструкции от автора (TheAlphamerc) [Wiki](https://github.com/TheAlphamerc/Luna/wiki/Gettings-Started)
+  
 На чём построен:
 * Flutter 3.13.9
 * Dart 3.1.5

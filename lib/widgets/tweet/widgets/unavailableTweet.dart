@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/ui/theme/theme.dart';
 
 class UnavailableTweet extends StatelessWidget {
   const UnavailableTweet({Key? key, required this.snapshot, required this.type})
@@ -38,7 +38,7 @@ class UnavailableTweet extends StatelessWidget {
                 ),
               ),
             )
-          : Text('This Tweet is unavailable', style: TextStyles.userNameStyle),
+          : Text('Эта публикация больше недоступна или была удалена', style: TextStyles.userNameStyle),
     );
   }
 }

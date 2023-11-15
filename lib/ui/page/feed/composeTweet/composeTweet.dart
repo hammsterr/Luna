@@ -1,25 +1,26 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_twitter_clone/helper/constant.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/composeTweet/state/composeTweetState.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/composeTweet/widget/composeBottomIconWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/composeTweet/widget/composeTweetImage.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/composeTweet/widget/widgetView.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/helper/constant.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/ui/page/feed/composeTweet/state/composeTweetState.dart';
+import 'package:Luna/ui/page/feed/composeTweet/widget/composeBottomIconWidget.dart';
+import 'package:Luna/ui/page/feed/composeTweet/widget/composeTweetImage.dart';
+import 'package:Luna/ui/page/feed/composeTweet/widget/composeTweetVideo.dart';
+import 'package:Luna/ui/page/feed/composeTweet/widget/widgetView.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/state/feedState.dart';
+import 'package:Luna/state/searchState.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customAppBar.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/url_text/customUrlText.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
-import 'package:translator/translator.dart';
 
 class ComposeTweetPage extends StatefulWidget {
   const ComposeTweetPage(
@@ -34,6 +35,7 @@ class ComposeTweetPage extends StatefulWidget {
 
 class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
   bool isScrollingDown = false;
+
   late FeedModel? model;
   late ScrollController scrollController;
 
@@ -81,6 +83,7 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
   void _onImageIconSelected(File file) {
     setState(() {
       _image = file;
+
     });
   }
 
@@ -95,6 +98,9 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
 
     FeedModel tweetModel = await createTweetModel();
     String? tweetId;
+
+
+
 
     /// If tweet contain image
     /// First image is uploaded on firebase storage
@@ -142,6 +148,7 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
     }
     tweetModel.key = tweetId;
 
+
     /// Checks for username in tweet description
     /// If username found, sends notification to all tagged user
     /// If no user found, compose tweet screen is closed and redirect back to home page.
@@ -177,10 +184,6 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
     var tags = Utility.getHashTags(_textEditingController.text);
     FeedModel reply = FeedModel(
         description: _textEditingController.text,
-        lanCode:
-            (await GoogleTranslator().translate(_textEditingController.text))
-                .sourceLanguage
-                .code,
         user: commentedUser,
         createdAt: DateTime.now().toUtc().toString(),
         tags: tags,
@@ -196,7 +199,13 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
                 : null,
         userId: myUser.userId!);
     return reply;
+
+
+
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -206,10 +215,10 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
         onActionPressed: _submitButton,
         isCrossButton: true,
         submitButtonText: widget.isTweet
-            ? 'Tweet'
+            ? 'Опубликовать'
             : widget.isRetweet
-                ? 'Retweet'
-                : 'Reply',
+                ? 'Репостнуть'
+                : 'Ответить',
         isSubmitDisable:
             !Provider.of<ComposeTweetState>(context).enableSubmitButton ||
                 Provider.of<FeedState>(context).isBusy,
@@ -233,8 +242,11 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
           ),
         ],
       ),
+
     );
+
   }
+
 }
 
 class _ComposeRetweet
@@ -350,6 +362,13 @@ class _ComposeRetweet
               onCrossIconPressed: viewState._onCrossIconPressed,
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16, left: 80, bottom: 8),
+            child: ComposeTweetVideo(
+              video: viewState._image,
+              onCrossIconPressed: viewState._onCrossIconPressed,
+            ),
+          ),
           Flexible(
             child: Stack(
               children: <Widget>[
@@ -429,7 +448,7 @@ class _ComposeTweet
                   const SizedBox(height: 30),
                   UrlText(
                     text:
-                        'Replying to ${viewState.model!.user!.userName ?? viewState.model!.user!.displayName}',
+                        'Ответ ${viewState.model!.user!.userName ?? viewState.model!.user!.displayName}',
                     style: TextStyle(
                       color: TwitterColor.paleSky,
                       fontSize: 13,
@@ -516,6 +535,10 @@ class _ComposeTweet
                   image: viewState._image,
                   onCrossIconPressed: viewState._onCrossIconPressed,
                 ),
+                ComposeTweetVideo(
+                  video: viewState._image,
+                  onCrossIconPressed: viewState._onCrossIconPressed,
+                ),
                 _UserList(
                   list: Provider.of<SearchState>(context).userlist,
                   textEditingController: viewState._textEditingController,
@@ -556,10 +579,10 @@ class _TextField extends StatelessWidget {
           decoration: InputDecoration(
               border: InputBorder.none,
               hintText: isTweet
-                  ? 'What\'s happening?'
+                  ? 'Что нового?'
                   : isRetweet
-                      ? 'Add a comment'
-                      : 'Tweet your reply',
+                      ? 'Добавить комментарий'
+                      : 'Напишите свой комментарий',
               hintStyle: const TextStyle(fontSize: 18)),
         ),
       ],
@@ -647,4 +670,6 @@ class _UserTile extends StatelessWidget {
       subtitle: Text(user.userName!),
     );
   }
+
+
 }

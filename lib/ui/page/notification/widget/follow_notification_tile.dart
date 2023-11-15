@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/notificationModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
+import 'package:Luna/model/notificationModel.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/ui/page/profile/profilePage.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/url_text/customUrlText.dart';
 
 class FollowNotificationTile extends StatelessWidget {
   final NotificationModel model;
@@ -29,7 +29,7 @@ class FollowNotificationTile extends StatelessWidget {
                     model.user.displayName!,
                     style: TextStyles.titleStyle.copyWith(fontSize: 14),
                   ),
-                  Text(" Followed you", style: TextStyles.subtitleStyle),
+                  Text(" Подписался(-ась) на вас", style: TextStyles.subtitleStyle),
                 ],
               ),
               const SizedBox(width: 10),
@@ -47,8 +47,8 @@ class _UserCard extends StatelessWidget {
   final UserModel user;
   const _UserCard({Key? key, required this.user}) : super(key: key);
   String getBio(String bio) {
-    if (bio == "Edit profile to update bio") {
-      return "No bio available";
+    if (bio == "Привет мир!") {
+      return "";
     } else {
       return bio.takeOnly(100);
     }

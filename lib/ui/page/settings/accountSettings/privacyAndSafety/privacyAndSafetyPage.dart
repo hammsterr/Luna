@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsAppbar.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/ui/page/settings/widgets/headerWidget.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsAppbar.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 class PrivacyAndSaftyPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class PrivacyAndSaftyPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: TwitterColor.white,
       appBar: SettingsAppBar(
-        title: 'Privacy and safety',
+        title: 'Приватность и безопасность',
         subtitle: user.userName,
       ),
       body: ListView(
@@ -24,7 +24,7 @@ class PrivacyAndSaftyPage extends StatelessWidget {
         children: const <Widget>[
           HeaderWidget('Tweets'),
           SettingRowWidget(
-            "Protect your tweet",
+            "Закрытый профиль",
             subtitle:
                 'Only current followers and people you approve in future will be able to see your tweets.',
             vPadding: 15,
@@ -106,7 +106,7 @@ class PrivacyAndSaftyPage extends StatelessWidget {
           SettingRowWidget(
             "Precise location",
             subtitle:
-                'Disabled \n\n\nIf enabled, Fwitter will collect, store, and use your device\'s precise location, such as your GPS information. This lets Fwitter improve your experience - for example, showing you mpre local content, ads, and recommendations.',
+                'Disabled \n\n\nIf enabled, Luna will collect, store, and use your device\'s precise location, such as your GPS information. This lets Luna improve your experience - for example, showing you mpre local content, ads, and recommendations.',
           ),
           HeaderWidget(
             'Personalisation and data',
@@ -117,7 +117,7 @@ class PrivacyAndSaftyPage extends StatelessWidget {
             subtitle: "Allow all",
           ),
           SettingRowWidget(
-            "See your Fwitter data",
+            "See your Luna data",
             subtitle:
                 "Review and edit your profile information and data associated with your account.",
           ),

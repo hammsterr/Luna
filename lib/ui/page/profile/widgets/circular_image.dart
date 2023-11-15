@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/constant.dart';
+import 'package:Luna/helper/constant.dart';
 
 class CircularImage extends StatelessWidget {
   const CircularImage(
@@ -30,7 +30,7 @@ class CircularImage extends StatelessWidget {
 
 CachedNetworkImageProvider customAdvanceNetworkImage(String? path) {
   if (path ==
-      'http://www.azembelani.co.za/wp-content/uploads/2016/07/20161014_58006bf6e7079-3.png') {
+      'https://i2.photo.2gis.com/images/profile/30258560098803276_96cf_640x.jpg') {
     path = Constants.dummyProfilePic;
   } else {
     path ??= Constants.dummyProfilePic;

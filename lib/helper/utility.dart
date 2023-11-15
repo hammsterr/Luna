@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import '../widgets/newWidget/customLoader.dart';
 
@@ -38,14 +39,18 @@ void cprint(dynamic data,
   }
 }
 
+
+
+
 class Utility {
   static String getPostTime2(String? date) {
     if (date == null || date.isEmpty) {
       return '';
     }
     var dt = DateTime.parse(date).toLocal();
-    var dat =
-        DateFormat.jm().format(dt) + ' - ' + DateFormat("dd MMM yy").format(dt);
+    initializeDateFormatting('ru', null); // Инициализация русской локали
+    var dateFormat = DateFormat.Hm("ru").addPattern('  dd MMMM yyyy');
+    var dat = dateFormat.format(dt);
     return dat;
   }
 
@@ -62,9 +67,12 @@ class Utility {
     if (date == null || date.isEmpty) {
       return '';
     }
+    initializeDateFormatting("ru", null);
+
+
     var dt = DateTime.parse(date).toLocal();
-    var dat = DateFormat("MMMM yyyy").format(dt);
-    return 'Joined $dat';
+    var dat = DateFormat("dd MMMM yyyy", "ru").format(dt);
+    return 'Присоединился $dat';
   }
 
   static String getChatTime(String? date) {
@@ -84,47 +92,47 @@ class Utility {
     } else if (dur.inDays > 30) {
       msg = DateFormat.yMMMd().format(dt);
     } else if (dur.inDays > 0) {
-      msg = '${dur.inDays} d';
-      return dur.inDays == 1 ? '1d' : DateFormat.MMMd().format(dt);
+      msg = '${dur.inDays} дн.';
+      return dur.inDays == 1 ? 'день назад' : DateFormat.MMMd().format(dt);
     } else if (dur.inHours > 0) {
-      msg = '${dur.inHours} h';
+      msg = '${dur.inHours} ч.';
     } else if (dur.inMinutes > 0) {
-      msg = '${dur.inMinutes} m';
+      msg = '${dur.inMinutes} мин.';
     } else if (dur.inSeconds > 0) {
-      msg = '${dur.inSeconds} s';
+      msg = '${dur.inSeconds} сек.';
     } else {
-      msg = 'now';
+      msg = 'сейчас';
     }
     return msg;
   }
 
   static String getPollTime(String date) {
     int hr, mm;
-    String msg = 'Poll ended';
+    String msg = 'Опрос завершён';
     var endDate = DateTime.parse(date);
     if (DateTime.now().isAfter(endDate)) {
       return msg;
     }
-    msg = 'Poll ended in';
+    msg = 'Опрос завершён за';
     var dur = endDate.difference(DateTime.now());
     hr = dur.inHours - dur.inDays * 24;
     mm = dur.inMinutes - (dur.inHours * 60);
     if (dur.inDays > 0) {
-      msg = ' ' + dur.inDays.toString() + (dur.inDays > 1 ? ' Days ' : ' Day');
+      msg = ' ' + dur.inDays.toString() + (dur.inDays > 1 ? ' дн. ' : ' день');
     }
     if (hr > 0) {
-      msg += ' ' + hr.toString() + ' hour';
+      msg += ' ' + hr.toString() + ' ч.';
     }
     if (mm > 0) {
-      msg += ' ' + mm.toString() + ' min';
+      msg += ' ' + mm.toString() + ' мин.';
     }
     return (dur.inDays).toString() +
-        ' Days ' +
+        ' дн. ' +
         ' ' +
         hr.toString() +
-        ' Hours ' +
+        ' ч. ' +
         mm.toString() +
-        ' min';
+        ' мин.';
   }
 
   static String? getSocialLinks(String? url) {
@@ -138,7 +146,7 @@ class Utility {
     } else {
       return null;
     }
-    cprint('Launching URL : $url');
+    cprint('Открытие ссылки : $url');
     return url;
   }
 
@@ -153,7 +161,7 @@ class Utility {
         mode: LaunchMode.externalApplication,
       );
     } else {
-      cprint('Could not launch $url');
+      cprint('Невозможно открыть $url');
     }
   }
 
@@ -203,19 +211,19 @@ class Utility {
   static bool validateCredentials(
       BuildContext context, String? email, String? password) {
     if (email == null || email.isEmpty) {
-      customSnackBar(context, 'Please enter email id');
+      customSnackBar(context, 'Введите email');
       return false;
     } else if (password == null || password.isEmpty) {
-      customSnackBar(context, 'Please enter password');
+      customSnackBar(context, 'Введите пароль');
       return false;
     } else if (password.length < 8) {
-      customSnackBar(context, 'Password must me 8 character long');
+      customSnackBar(context, 'Пароль должен быть длиннее 8 символов');
       return false;
     }
 
     var status = validateEmail(email);
     if (!status) {
-      customSnackBar(context, 'Please enter valid email id');
+      customSnackBar(context, 'Введите правильный email');
       return false;
     }
     return true;
@@ -249,10 +257,10 @@ class Utility {
   static Future<Uri> createLinkToShare(BuildContext context, String id,
       {required SocialMetaTagParameters socialMetaTagParameters}) async {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
-      uriPrefix: 'https://fwitter.page.link',
-      link: Uri.parse('https://twitter.com/$id'),
+      uriPrefix: 'https://lunarv.page.link',
+      link: Uri.parse('https://lunarv.page.link/$id'),
       androidParameters: AndroidParameters(
-        packageName: 'com.thealphamerc.flutter_twitter_clone_dev',
+        packageName: 'com.hamy.lunarv_dev',
         minimumVersion: 0,
       ),
       socialMetaTagParameters: socialMetaTagParameters,

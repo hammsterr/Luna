@@ -1,9 +1,9 @@
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:Luna/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/common/usersListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/follow/followListState.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/customLoader.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/ui/page/common/usersListPage.dart';
+import 'package:Luna/ui/page/profile/follow/followListState.dart';
+import 'package:Luna/widgets/newWidget/customLoader.dart';
 import 'package:provider/provider.dart';
 
 class FollowingListPage extends StatelessWidget {
@@ -38,11 +38,11 @@ class FollowingListPage extends StatelessWidget {
       );
     }
     return UsersListPage(
-      pageTitle: 'Following',
+      pageTitle: 'Подписки',
       userIdsList: userList,
       emptyScreenText:
-          '${profile.userName ?? profile.userName} isn\'t follow anyone',
-      emptyScreenSubTileText: 'When they do they\'ll be listed here.',
+          '${profile.userName ?? profile.userName} не подписан ни на кого',
+      emptyScreenSubTileText: 'Здесь будет список подписок.',
       onFollowPressed: (user) {
         context.read<FollowListState>().followUser(user);
       },

@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/firebase_database.dart' as database;
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/shared_prefrence_helper.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/appState.dart';
-import 'package:flutter_twitter_clone/ui/page/common/locator.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/helper/shared_prefrence_helper.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/appState.dart';
+import 'package:Luna/ui/page/common/locator.dart';
 // import 'package:link_preview_generator/link_preview_generator.dart'
 //     show WebInfo;
 import 'package:path/path.dart' as path;
@@ -91,7 +91,7 @@ class FeedState extends AppState {
   /// set tweet for detail tweet page
   /// Setter call when tweet is tapped to view detail
   /// Add Tweet detail is added in _tweetDetailModelList
-  /// It makes `Fwitter` to view nested Tweets
+  /// It makes `Luna` to view nested Tweets
   set setFeedModel(FeedModel model) {
     _tweetDetailModelList ??= [];
 

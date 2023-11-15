@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/ui/page/settings/widgets/headerWidget.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customAppBar.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 
 class DataUsagePage extends StatelessWidget {
   const DataUsagePage({Key? key}) : super(key: key);
@@ -50,14 +50,14 @@ class DataUsagePage extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 15),
-            child: TitleText('Data preference'),
+            child: TitleText('Настройки сети'),
           ),
           const Divider(height: 0),
-          _row("Mobile data & Wi-Fi"),
+          _row("Мобильный трафик и WI-FI"),
           const Divider(height: 0),
-          _row("Wi-Fi only"),
+          _row("Только WI-FI"),
           const Divider(height: 0),
-          _row("Never"),
+          _row("Никогда"),
         ],
       ),
     );
@@ -80,12 +80,12 @@ class DataUsagePage extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: TitleText('Dark mode appearance'),
+            child: TitleText('Режим темной темы'),
           ),
           const Divider(height: 0),
-          _row("Dim"),
+          _row("Тусклый"),
           const Divider(height: 0),
-          _row("Light out"),
+          _row("Темный"),
         ],
       ),
     );
@@ -111,28 +111,28 @@ class DataUsagePage extends StatelessWidget {
       appBar: CustomAppBar(
         isBackButton: true,
         title: customTitleText(
-          'Data Usage',
+          'Использование сети',
         ),
       ),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
-          const HeaderWidget('Data Saver'),
+          const HeaderWidget('Экономия трафика'),
           const SettingRowWidget(
-            "Data saver",
+            "Экономия трафика",
             showCheckBox: true,
             vPadding: 15,
             showDivider: false,
             subtitle:
-                'When enabled, video won\'t autoplay and lower-quality images load. This automatically reduces your data usage for all Fwitter accounts on this device.',
+                'Когда этот режим включен, фото и видео будут загружаться в невысоком качестве для экономии трафика.',
             visibleSwitch: null,
           ),
           const Divider(height: 0),
-          const HeaderWidget('Images'),
+          const HeaderWidget('Фото'),
           SettingRowWidget(
-            "High quality images",
+            "Высокое качество фото",
             subtitle:
-                'Mobile data & Wi-Fi \n\nSelect when high quality images should load.',
+                'Данные режимы в разработке...',
             vPadding: 15,
             onPressed: () {
               openDarkModeSettings(context);
@@ -142,13 +142,13 @@ class DataUsagePage extends StatelessWidget {
             showCheckBox: null,
           ),
           const HeaderWidget(
-            'Video',
+            'Видео',
             secondHeader: true,
           ),
           SettingRowWidget(
-            "High-quality video",
+            "Высокое качество фото",
             subtitle:
-                'Wi-Fi only \n\nSelect when the highest quality available should play.',
+                'Данные режимы в разработке...',
             vPadding: 15,
             onPressed: () {
               openDarkModeSettings(context);
@@ -157,9 +157,9 @@ class DataUsagePage extends StatelessWidget {
             showCheckBox: null,
           ),
           SettingRowWidget(
-            "Video autoplay",
+            "Автовоспроизведение видео",
             subtitle:
-                'Wi-Fi only \n\nSelect when video should play automatically.',
+                'В разработке...',
             vPadding: 15,
             onPressed: () {
               openDarkModeSettings(context);
@@ -168,24 +168,24 @@ class DataUsagePage extends StatelessWidget {
             visibleSwitch: null,
           ),
           const HeaderWidget(
-            'Data sync',
+            'Синхронизация данных',
             secondHeader: true,
           ),
           const SettingRowWidget(
-            "Sync data",
+            "Синхронизация данных",
             showCheckBox: true,
             visibleSwitch: null,
           ),
           const SettingRowWidget(
-            "Sync interval",
-            subtitle: 'Daily',
+            "Интервал синхронизации",
+            subtitle: 'Ежедневно',
             showCheckBox: null,
             visibleSwitch: null,
           ),
           const SettingRowWidget(
             null,
             subtitle:
-                'Allow Fwitter to sync data in the background to enhance your experience.',
+                'В разработке (возможность синхронизации в фоне).',
             vPadding: 10,
             showCheckBox: null,
             visibleSwitch: null,

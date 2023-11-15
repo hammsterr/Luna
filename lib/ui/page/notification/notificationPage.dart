@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/notificationModel.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/notificationState.dart';
-import 'package:flutter_twitter_clone/ui/page/notification/widget/follow_notification_tile.dart';
-import 'package:flutter_twitter_clone/ui/page/notification/widget/post_like_tile.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/emptyList.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/model/notificationModel.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/state/notificationState.dart';
+import 'package:Luna/ui/page/notification/widget/follow_notification_tile.dart';
+import 'package:Luna/ui/page/notification/widget/post_like_tile.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customAppBar.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/emptyList.dart';
 import 'package:provider/provider.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -45,7 +45,7 @@ class _NotificationPageState extends State<NotificationPage> {
       appBar: CustomAppBar(
         scaffoldKey: widget.scaffoldKey,
         title: customTitleText(
-          'Notifications',
+          'Уведомления',
         ),
         icon: AppIcon.settings,
         onActionPressed: onSettingIconPressed,
@@ -99,8 +99,8 @@ class NotificationPageBody extends StatelessWidget {
       return const Padding(
         padding: EdgeInsets.symmetric(horizontal: 30),
         child: EmptyList(
-          'No Notification available yet',
-          subTitle: 'When new notification found, they\'ll show up here.',
+          'Уведомлений нет',
+          subTitle: 'Когда что нибудь произойдёт, уведомление появится здесь.',
         ),
       );
     }

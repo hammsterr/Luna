@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter_twitter_clone/helper/shared_prefrence_helper.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/bookmarkModel.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/ui/page/common/locator.dart';
+import 'package:Luna/helper/shared_prefrence_helper.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/bookmarkModel.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/ui/page/common/locator.dart';
 import 'appState.dart';
 
 class BookmarkState extends AppState {
@@ -21,6 +21,18 @@ class BookmarkState extends AppState {
     if (!_bookmarkList!.any((element) => element.key == model.key)) {
       _bookmarkList!.add(model);
     }
+  }
+
+  /// Remove Tweet from bookmark
+  Future removeBookmark(String tweetId) async {
+    final pref = getIt<SharedPreferenceHelper>();
+    var userId = await pref.getUserProfile().then((value) => value!.userId);
+    DatabaseReference dbReference =
+    kDatabase.child('bookmark').child(userId!).child(tweetId);
+    await dbReference.remove();
+
+    // Notify listeners to update UI
+    notifyListeners();
   }
 
   List<FeedModel>? get tweetList => _tweetList;

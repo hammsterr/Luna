@@ -1,16 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/constant.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/Auth/widget/googleLoginButton.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customFlatButton.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/customLoader.dart';
+import 'package:Luna/helper/constant.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/page/Auth/widget/googleLoginButton.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customFlatButton.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/customLoader.dart';
 import 'package:provider/provider.dart';
 
 class Signup extends StatefulWidget {
@@ -49,7 +49,7 @@ class _SignupState extends State<Signup> {
 
   Widget _body(BuildContext context) {
     return Container(
-      height: context.height - 88,
+      height: context.height - 100,
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Form(
         key: _formKey,
@@ -57,21 +57,23 @@ class _SignupState extends State<Signup> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            _entryField('Name', controller: _nameController),
-            _entryField('Enter email',
+            _entryField('Имя', controller: _nameController),
+            _entryField('Email',
                 controller: _emailController, isEmail: true),
-            _entryField('Enter password',
+            _entryField('Пароль',
                 controller: _passwordController, isPassword: true),
-            _entryField('Confirm password',
+            _entryField('Повторите пароль',
                 controller: _confirmController, isPassword: true),
             _submitButton(context),
-            const Divider(height: 30),
-            const SizedBox(height: 30),
-            GoogleLoginButton(
+            //const Divider(height: 30),
+            const SizedBox(height: 50),
+/*
+                                                    GOOGLE SIGNUP DISABLED
+              GoogleLoginButton(
               loginCallback: widget.loginCallback,
               loader: loader,
-            ),
-            const SizedBox(height: 30),
+            ),*/
+            const SizedBox(height: 10),
           ],
         ),
       ),
@@ -116,7 +118,7 @@ class _SignupState extends State<Signup> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 35),
       child: CustomFlatButton(
-        label: "Sign up",
+        label: "Продолжить",
         onPressed: () => _submitForm(context),
         borderRadius: 30,
       ),
@@ -125,19 +127,19 @@ class _SignupState extends State<Signup> {
 
   void _submitForm(BuildContext context) {
     if (_nameController.text.isEmpty) {
-      Utility.customSnackBar(context, 'Please enter name');
+      Utility.customSnackBar(context, 'Введите имя');
       return;
     }
     if (_nameController.text.length > 27) {
-      Utility.customSnackBar(context, 'Name length cannot exceed 27 character');
+      Utility.customSnackBar(context, 'Имя слишком длинное');
       return;
     }
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
-      Utility.customSnackBar(context, 'Please fill form carefully');
+      Utility.customSnackBar(context, 'Вы точно ничего не забыли?');
       return;
     } else if (_passwordController.text != _confirmController.text) {
       Utility.customSnackBar(
-          context, 'Password and confirm password did not match');
+          context, 'Пароли не совпадают');
       return;
     }
 
@@ -148,12 +150,12 @@ class _SignupState extends State<Signup> {
 
     UserModel user = UserModel(
       email: _emailController.text.toLowerCase(),
-      bio: 'Edit profile to update bio',
+      bio: 'Привет мир!',
       // contact:  _mobileController.text,
       displayName: _nameController.text,
       dob: DateTime(1950, DateTime.now().month, DateTime.now().day + 3)
           .toString(),
-      location: 'Somewhere in universe',
+      location: 'Где то во вселенной...',
       profilePic: Constants.dummyProfilePicList[randomNumber],
       isVerified: false,
     );
@@ -181,7 +183,7 @@ class _SignupState extends State<Signup> {
     return Scaffold(
       appBar: AppBar(
         title: customText(
-          'Sign Up',
+          'Регистрация',
           context: context,
           style: const TextStyle(fontSize: 20),
         ),

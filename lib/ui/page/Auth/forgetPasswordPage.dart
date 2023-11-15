@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customFlatButton.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customFlatButton.dart';
+import 'package:Luna/widgets/customWidgets.dart';
 import 'package:provider/provider.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
@@ -44,7 +44,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
             const SizedBox(
               height: 50,
             ),
-            _entryField('Enter email', controller: _emailController),
+            _entryField('Введите Email', controller: _emailController),
             // SizedBox(height: 10,),
             _submitButton(context),
           ],
@@ -82,7 +82,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
       margin: const EdgeInsets.symmetric(vertical: 15),
       width: MediaQuery.of(context).size.width,
       child: CustomFlatButton(
-        label: "Submit",
+        label: "Далее",
         onPressed: _submit,
         borderRadius: 30,
       ),
@@ -93,13 +93,13 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
     return Container(
         child: Column(
       children: <Widget>[
-        customText('Forget Password',
+        customText('Забыли пароль',
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
         const SizedBox(height: 15),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: customText(
-              'Enter your email address below to receive password reset instruction',
+              'Введите свой email. На него отправим ссылку',
               style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -112,14 +112,14 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
   void _submit() {
     if (_emailController.text.isEmpty) {
-      Utility.customSnackBar(context, 'Email field cannot be empty');
+      Utility.customSnackBar(context, 'Поле email не должно быть пустым');
       return;
     }
     var isValidEmail = Utility.validateEmail(
       _emailController.text,
     );
     if (!isValidEmail) {
-      Utility.customSnackBar(context, 'Please enter valid email address');
+      Utility.customSnackBar(context, 'Введите правильный email');
       return;
     }
 
@@ -132,7 +132,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: customText('Forget Password',
+        title: customText('Забыли пароль',
             context: context, style: const TextStyle(fontSize: 20)),
         centerTitle: true,
       ),

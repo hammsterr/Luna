@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_twitter_clone/model/user.dart';
+import 'package:Luna/model/user.dart';
 
 class NotificationModel {
   String? id;

@@ -13,15 +13,15 @@
 
 
 ## Функции
-* Функционал приложения [здесь](https://github.com/TheAlphamerc/flutter_twitter_clone/projects/1)
-* Messaging chat section status can be seen at [here](https://github.com/TheAlphamerc/flutter_twitter_clone/projects/2)
+* Функционал приложения [здесь](https://github.com/TheAlphamerc/Luna/projects/1)
+* Messaging chat section status can be seen at [here](https://github.com/TheAlphamerc/Luna/projects/2)
 
 
 <details>
    <summary> еще кое что... </summary>
- :boom: Fwitter app now uses both firebase `realtime` and `firestore` database.:boom:
-* In branch **firetore** Fwitter uses `Firestore` database for app. 
-* In branch **Master** and **realtime_db** Fwitter uses `Firebase Realtime` database for app.
+ :boom: Luna app now uses both firebase `realtime` and `firestore` database.:boom:
+* In branch **firetore** Luna uses `Firestore` database for app. 
+* In branch **Master** and **realtime_db** Luna uses `Firebase Realtime` database for app.
 </details>
 
 ## Зависимости
@@ -101,7 +101,7 @@ Content Prefrences Page      |  Display Setting Page    |  Data Settings Page   
 
 
 ## Начало 
-* Инструкции от автора (TheAlphamerc) [Wiki](https://github.com/TheAlphamerc/flutter_twitter_clone/wiki/Gettings-Started) 
+* Инструкции от автора (TheAlphamerc) [Wiki](https://github.com/TheAlphamerc/Luna/wiki/Gettings-Started) 
 
 ## Структура директорий
 <details>
@@ -237,8 +237,8 @@ Content Prefrences Page      |  Display Setting Page    |  Data Settings Page   
      
 ## Поддержка
 
-Советую поддерживать авторский репозиторий - [contribution guide](https://github.com/TheAlphamerc/flutter_twitter_clone/blob/master/CONTRIBUTING.md),
- [pull request](https://github.com/TheAlphamerc/flutter_twitter_clone/pulls). Этот ФОРК создан "для себя" и для обучения программированию.
+Советую поддерживать авторский репозиторий - [contribution guide](https://github.com/TheAlphamerc/Luna/blob/master/CONTRIBUTING.md),
+ [pull request](https://github.com/TheAlphamerc/Luna/pulls). Этот ФОРК создан "для себя" и для обучения программированию.
 
 ## ПРИЛОЖЕНИЕ СОЗДАНО И РАЗРАБОТАНО:
 

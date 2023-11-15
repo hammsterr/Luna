@@ -1,18 +1,26 @@
+import 'package:Luna/ui/page/profile/profilePage.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/share_widget.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/tweet.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/state/feedState.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/share_widget.dart';
+import 'package:Luna/widgets/tweet/tweet.dart';
 import 'package:provider/provider.dart';
 
+import '../../../state/profile_state.dart';
+
 class TweetBottomSheet {
+
+
+
+
+
   Widget tweetOptionIcon(BuildContext context,
       {required FeedModel model,
       required TweetType type,
@@ -80,6 +88,7 @@ class TweetBottomSheet {
       required FeedModel model,
       required TweetType type,
       required GlobalKey<ScaffoldState> scaffoldKey}) {
+    var authState = Provider.of<AuthState>(context);
     return Column(
       children: <Widget>[
         Container(
@@ -93,15 +102,15 @@ class TweetBottomSheet {
           ),
         ),
         _widgetBottomSheetRow(context, AppIcon.link,
-            text: 'Copy link to tweet', isEnable: true, onPressed: () async {
+            text: 'Скопировать ссылку на пост', isEnable: true, onPressed: () async {
           Navigator.pop(context);
           var uri = await Utility.createLinkToShare(
             context,
             "tweet/${model.key}",
             socialMetaTagParameters: SocialMetaTagParameters(
                 description: model.description ??
-                    "${model.user!.displayName} posted a tweet on Fwitter.",
-                title: "Tweet on Fwitter app",
+                    "${model.user!.displayName} опубликовал пост в Луне.",
+                title: "Пост в луне",
                 imageUrl: Uri.parse(
                     "https://play-lh.googleusercontent.com/e66XMuvW5hZ7HnFf8R_lcA3TFgkxm0SuyaMsBs3KENijNHZlogUAjxeu9COqsejV5w=s180-rw")),
           );
@@ -109,26 +118,26 @@ class TweetBottomSheet {
           Utility.copyToClipBoard(
               context: context,
               text: uri.toString(),
-              message: "Tweet link copy to clipboard");
+              message: "Ссылка скопирована");
         }),
         isMyTweet
             ? _widgetBottomSheetRow(
                 context,
                 AppIcon.delete,
-                text: 'Delete Tweet',
+                text: 'Удаление публикации',
                 onPressed: () {
                   showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
-                      title: const Text("Delete"),
-                      content: const Text('Do you want to delete this Tweet?'),
+                      title: const Text("Удалить"),
+                      content: const Text('Вы точно хотите удалить этот пост?'),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                             Navigator.pop(context);
                           },
-                          child: const Text('Cancel'),
+                          child: const Text('Оставить'),
                         ),
                         TextButton(
                           style: ButtonStyle(
@@ -148,7 +157,7 @@ class TweetBottomSheet {
                               parentkey: model.parentkey,
                             );
                           },
-                          child: const Text('Confirm'),
+                          child: const Text('Подтвердить'),
                         ),
                       ],
                     ),
@@ -161,43 +170,39 @@ class TweetBottomSheet {
             ? _widgetBottomSheetRow(
                 context,
                 AppIcon.unFollow,
-                text: 'Pin to profile',
+                text: 'Закрепить в профиле',
               )
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.unFollow,
-                text: 'Unfollow ${model.user!.userName}',
-              ),
+                text: 'Отписаться ${model.user!.userName}',
+
+        ),
         isMyTweet
             ? Container()
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.mute,
-                text: 'Mute ${model.user!.userName}',
+                text: 'Заглушить ${model.user!.userName}',
               ),
-        _widgetBottomSheetRow(
-          context,
-          AppIcon.mute,
-          text: 'Mute this conversation',
-        ),
-        _widgetBottomSheetRow(
+      _widgetBottomSheetRow(
           context,
           AppIcon.viewHidden,
-          text: 'View hidden replies',
+          text: 'Кнопочка...',
         ),
         isMyTweet
             ? Container()
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.block,
-                text: 'Block ${model.user!.userName}',
+                text: 'Заблокировать ${model.user!.userName}',
               ),
         isMyTweet
             ? Container()
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.report,
-                text: 'Report Tweet',
+                text: 'Пожаловаться',
               ),
       ],
     );
@@ -212,7 +217,7 @@ class TweetBottomSheet {
       children: <Widget>[
         Container(
           width: context.width * .1,
-          height: 5,
+          height: 10,
           decoration: BoxDecoration(
             color: Theme.of(context).dividerColor,
             borderRadius: const BorderRadius.all(
@@ -221,14 +226,14 @@ class TweetBottomSheet {
           ),
         ),
         _widgetBottomSheetRow(context, AppIcon.link,
-            text: 'Copy link to tweet', isEnable: true, onPressed: () async {
+            text: 'Скопировать ссылку', isEnable: true, onPressed: () async {
           var uri = await Utility.createLinkToShare(
             context,
             "tweet/${model.key}",
             socialMetaTagParameters: SocialMetaTagParameters(
                 description: model.description ??
-                    "${model.user!.displayName} posted a tweet on Fwitter.",
-                title: "Tweet on Fwitter app",
+                    "${model.user!.displayName} опубликовал(а) пост в Луне.",
+                title: "Пост в Луне",
                 imageUrl: Uri.parse(
                     "https://play-lh.googleusercontent.com/e66XMuvW5hZ7HnFf8R_lcA3TFgkxm0SuyaMsBs3KENijNHZlogUAjxeu9COqsejV5w=s180-rw")),
           );
@@ -237,26 +242,26 @@ class TweetBottomSheet {
           Utility.copyToClipBoard(
               context: context,
               text: uri.toString(),
-              message: "Tweet link copy to clipboard");
+              message: "Ссылка на пост скопирована");
         }),
         isMyTweet
             ? _widgetBottomSheetRow(
                 context,
                 AppIcon.delete,
-                text: 'Delete Tweet',
+                text: 'Удалить',
                 onPressed: () {
                   showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
-                      title: const Text("Delete"),
-                      content: const Text('Do you want to delete this Tweet?'),
+                      title: const Text("Удалить пост"),
+                      content: const Text('Вы точно хотите удалить этот пост?'),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                             Navigator.pop(context);
                           },
-                          child: const Text('Cancel'),
+                          child: const Text('Оставить'),
                         ),
                         TextButton(
                           style: ButtonStyle(
@@ -276,7 +281,7 @@ class TweetBottomSheet {
                               parentkey: model.parentkey,
                             );
                           },
-                          child: const Text('Confirm'),
+                          child: const Text('Подтвердить'),
                         ),
                       ],
                     ),
@@ -289,40 +294,52 @@ class TweetBottomSheet {
             ? _widgetBottomSheetRow(
                 context,
                 AppIcon.thumbpinFill,
-                text: 'Pin to profile',
+                text: 'Закрепить в профиле',
+                onPressed: () {
+
+                }
               )
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.sadFace,
-                text: 'Not interested in this',
+                text: 'Это не интересно',
+                onPressed: () {
+
+                }
               ),
         isMyTweet
             ? Container()
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.unFollow,
-                text: 'Unfollow ${model.user!.userName}',
+                text: 'Отписаться ${model.user!.userName}',
+                onPressed: () {
+
+                }
               ),
         isMyTweet
             ? Container()
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.mute,
-                text: 'Mute ${model.user!.userName}',
+                text: 'Заглушить ${model.user!.userName}',
+                onPressed: () {
+
+                }
               ),
         isMyTweet
             ? Container()
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.block,
-                text: 'Block ${model.user!.userName}',
+                text: 'Заблокировать ${model.user!.userName}',
               ),
         isMyTweet
             ? Container()
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.report,
-                text: 'Report Tweet',
+                text: 'Жалоба',
               ),
       ],
     );
@@ -423,7 +440,7 @@ class TweetBottomSheet {
           context,
           AppIcon.retweet,
           isEnable: true,
-          text: 'Retweet',
+          text: 'Репост',
           onPressed: () async {
             var state = Provider.of<FeedState>(context, listen: false);
             var authState = Provider.of<AuthState>(context, listen: false);
@@ -454,7 +471,7 @@ class TweetBottomSheet {
         _widgetBottomSheetRow(
           context,
           AppIcon.edit,
-          text: 'Retweet with comment',
+          text: 'Репостнуть с комментарием',
           isEnable: true,
           onPressed: () {
             var state = Provider.of<FeedState>(context, listen: false);
@@ -496,7 +513,7 @@ class TweetBottomSheet {
   Widget _shareTweet(BuildContext context, FeedModel model, TweetType? type) {
     var socialMetaTagParameters = SocialMetaTagParameters(
         description: model.description ?? "",
-        title: "${model.user!.displayName} posted a tweet on Fwitter.",
+        title: "${model.user!.displayName} запостил(-а) в Луне.",
         imageUrl: Uri.parse(model.user?.profilePic ??
             "https://play-lh.googleusercontent.com/e66XMuvW5hZ7HnFf8R_lcA3TFgkxm0SuyaMsBs3KENijNHZlogUAjxeu9COqsejV5w=s180-rw"));
     return Column(
@@ -516,13 +533,13 @@ class TweetBottomSheet {
           context,
           AppIcon.bookmark,
           isEnable: true,
-          text: 'Bookmark',
+          text: 'В закладки',
           onPressed: () async {
             var state = Provider.of<FeedState>(context, listen: false);
             await state.addBookmark(model.key!);
             Navigator.pop(context);
             ScaffoldMessenger.maybeOf(context)!.showSnackBar(
-              const SnackBar(content: Text("Bookmark saved!!")),
+              const SnackBar(content: Text("Закладка сохранена")),
             );
           },
         ),
@@ -531,7 +548,7 @@ class TweetBottomSheet {
           context,
           AppIcon.link,
           isEnable: true,
-          text: 'Share Link',
+          text: 'Поделиться ссылкой',
           onPressed: () async {
             Navigator.pop(context);
             var url = Utility.createLinkToShare(
@@ -547,12 +564,12 @@ class TweetBottomSheet {
         _widgetBottomSheetRow(
           context,
           AppIcon.image,
-          text: 'Share with Tweet thumbnail',
+          text: 'Поделиться красиво ✨',
           isEnable: true,
           onPressed: () {
             socialMetaTagParameters = SocialMetaTagParameters(
                 description: model.description ?? "",
-                title: "${model.user!.displayName} posted a tweet on Fwitter.",
+                title: "${model.user!.displayName} запостил(-а) в Луне",
                 imageUrl: Uri.parse(model.user?.profilePic ??
                     "https://play-lh.googleusercontent.com/e66XMuvW5hZ7HnFf8R_lcA3TFgkxm0SuyaMsBs3KENijNHZlogUAjxeu9COqsejV5w=s180-rw"));
             Navigator.pop(context);

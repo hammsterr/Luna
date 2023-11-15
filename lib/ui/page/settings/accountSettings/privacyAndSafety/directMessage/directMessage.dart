@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsAppbar.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/page/settings/widgets/headerWidget.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsAppbar.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:Luna/ui/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 class DirectMessagesPage extends StatelessWidget {
@@ -16,27 +16,27 @@ class DirectMessagesPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: TwitterColor.white,
       appBar: SettingsAppBar(
-        title: 'Direct Messages',
+        title: 'Личные сообщения',
         subtitle: user.userName,
       ),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: const <Widget>[
           HeaderWidget(
-            'Direct Messages',
+            'Личные сообщения',
             secondHeader: true,
           ),
           SettingRowWidget(
-            "Receive message requests",
+            "Сохранять запросы переписок",
             navigateTo: null,
             showDivider: false,
             visibleSwitch: true,
             vPadding: 20,
             subtitle:
-                'You will be able to receive Direct Message requests from anyone on Fwitter, even if you don\'t follow them.',
+                'You will be able to receive Direct Message requests from anyone on Luna, even if you don\'t follow them.',
           ),
           SettingRowWidget(
-            "Show read receipts",
+            "Показывать индикацию о прочтении",
             navigateTo: null,
             showDivider: false,
             visibleSwitch: true,

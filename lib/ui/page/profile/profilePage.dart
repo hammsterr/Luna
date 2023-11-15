@@ -1,29 +1,30 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/chats/chatState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/state/profile_state.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/EditProfilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/follow/followerListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/follow/followingListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profileImageView.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/qrCode/scanner.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/tabPainter.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/cache_image.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/customLoader.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/emptyList.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/rippleButton.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/tweet.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/widgets/tweetBottomSheet.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/chats/chatState.dart';
+import 'package:Luna/state/feedState.dart';
+import 'package:Luna/state/profile_state.dart';
+import 'package:Luna/ui/page/profile/EditProfilePage.dart';
+import 'package:Luna/ui/page/profile/follow/followerListPage.dart';
+import 'package:Luna/ui/page/profile/follow/followingListPage.dart';
+import 'package:Luna/ui/page/profile/profileImageView.dart';
+import 'package:Luna/ui/page/profile/qrCode/scanner.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/ui/page/profile/widgets/tabPainter.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/cache_image.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/customLoader.dart';
+import 'package:Luna/widgets/newWidget/emptyList.dart';
+import 'package:Luna/widgets/newWidget/rippleButton.dart';
+import 'package:Luna/widgets/tweet/tweet.dart';
+import 'package:Luna/widgets/tweet/widgets/tweetBottomSheet.dart';
+import 'package:Luna/widgets/url_text/customUrlText.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key, required this.profileId}) : super(key: key);
@@ -83,9 +84,9 @@ class _ProfilePageState extends State<ProfilePage>
             ? const SizedBox.shrink()
             : PopupMenuButton<Choice>(
                 onSelected: (d) {
-                  if (d.title == "Share") {
+                  if (d.title == "Поделиться") {
                     shareProfile(context);
-                  } else if (d.title == "QR code") {
+                  } else if (d.title == "QR код") {
                     Navigator.push(context,
                         ScanScreen.getRoute(authState.profileUserModel));
                   }
@@ -129,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage>
                     child: CacheImage(
                       path: authState.profileUserModel.bannerImage ??
                           'https://pbs.twimg.com/profile_banners/457684585/1510495215/1500x500',
-                      fit: BoxFit.fill,
+                      fit: BoxFit.fitWidth,
                     ),
                   ),
                   Container(
@@ -242,17 +243,17 @@ class _ProfilePageState extends State<ProfilePage>
                                   // Otherwise Follow/Following button will be display
                                   child: Text(
                                     isMyProfile
-                                        ? 'Edit Profile'
+                                        ? 'Редактировать'
                                         : isFollower()
-                                            ? 'Following'
-                                            : 'Follow',
+                                            ? 'Вы подписаны'
+                                            : 'Подписаться',
                                     style: TextStyle(
                                       color: isMyProfile
                                           ? Colors.black87.withAlpha(180)
                                           : isFollower()
                                               ? TwitterColor.white
-                                              : Colors.blue,
-                                      fontSize: 17,
+                                              : Colors.blueAccent,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -316,10 +317,10 @@ class _ProfilePageState extends State<ProfilePage>
       context,
       "profilePage/${widget.profileId}/",
       socialMetaTagParameters: SocialMetaTagParameters(
-        description: !user.bio!.contains("Edit profile")
+        description: !user.bio!.contains("Редактировать")
             ? user.bio
-            : "Checkout ${user.displayName}'s profile on Fwitter app",
-        title: "${user.displayName} is on Fwitter app",
+            : "Профиль ${user.displayName} в Луне",
+        title: "${user.displayName} в Луне",
         imageUrl: Uri.parse(user.profilePic!),
       ),
     );
@@ -368,9 +369,9 @@ class _ProfilePageState extends State<ProfilePage>
                         indicator: TabIndicator(),
                         controller: _tabController,
                         tabs: const <Widget>[
-                          Text("Tweets"),
-                          Text("Tweets & replies"),
-                          Text("Media")
+                          Text("Посты"),
+                          Text("Ответы"),
+                          Text("Медиа")
                         ],
                       ),
                     )
@@ -440,11 +441,11 @@ class _ProfilePageState extends State<ProfilePage>
                 padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
                 child: NotifyText(
                   title: isMyProfile
-                      ? 'You haven\'t ${isReply ? 'reply to any Tweet' : isMedia ? 'post any media Tweet yet' : 'post any Tweet yet'}'
-                      : '${authState.profileUserModel.userName} hasn\'t ${isReply ? 'reply to any Tweet' : isMedia ? 'post any media Tweet yet' : 'post any Tweet yet'}',
+                      ? 'Вы не ${isReply ? 'отвечали на посты' : isMedia ? 'постили медиа' : 'постили ничего'}'
+                      : '${authState.profileUserModel.userName} не ${isReply ? 'отвечал(-а) на посты' : isMedia ? 'постил(-а) медиа' : 'постил(-а) ничего'}',
                   subTitle: isMyProfile
-                      ? 'Tap tweet button to add new'
-                      : 'Once he\'ll do, they will be shown up here',
+                      ? 'Нажмите на кнопку с пером, чтобы создать публикацию'
+                      : 'Когда пользователь опубликует пост, он будет здесь',
                 ),
               )
 
@@ -483,8 +484,8 @@ class UserNameRowWidget extends StatelessWidget {
   String getBio(String bio) {
     if (isMyProfile) {
       return bio;
-    } else if (bio == "Edit profile to update bio") {
-      return "No bio available";
+    } else if (bio == "Привет мир!") {
+      return "Привет мир!";
     } else {
       return bio;
     }
@@ -609,7 +610,7 @@ class UserNameRowWidget extends StatelessWidget {
                 width: 10,
                 height: 30,
               ),
-              _textButton(context, user.getFollower, ' Followers', () {
+              _textButton(context, user.getFollower, ' подписчиков', () {
                 var state = context.read<ProfileState>();
                 Navigator.push(
                   context,
@@ -620,7 +621,7 @@ class UserNameRowWidget extends StatelessWidget {
                 );
               }),
               const SizedBox(width: 40),
-              _textButton(context, user.getFollowing, ' Following', () {
+              _textButton(context, user.getFollowing, ' подписок', () {
                 var state = context.read<ProfileState>();
                 Navigator.push(
                   context,
@@ -647,9 +648,9 @@ class Choice {
 }
 
 const List<Choice> choices = <Choice>[
-  Choice(title: 'Share', icon: Icons.directions_car, isEnable: true),
-  Choice(title: 'QR code', icon: Icons.directions_railway, isEnable: true),
-  Choice(title: 'Draft', icon: Icons.directions_bike),
-  Choice(title: 'View Lists', icon: Icons.directions_boat),
-  Choice(title: 'View Moments', icon: Icons.directions_bus),
+  Choice(title: 'Поделиться', icon: Icons.directions_car, isEnable: true),
+  Choice(title: 'QR код', icon: Icons.directions_railway, isEnable: true),
+  Choice(title: 'Драфт', icon: Icons.directions_bike, isEnable: false),
+  //Choice(title: 'Видеть список', icon: Icons.directions_boat, isEnable: false),
+  Choice(title: 'Клипы', icon: Icons.directions_bus, isEnable: false),
 ];

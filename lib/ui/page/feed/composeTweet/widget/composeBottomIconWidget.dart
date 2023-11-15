@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customWidgets.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ComposeBottomIconWidget extends StatefulWidget {
@@ -113,7 +113,7 @@ class _ComposeBottomIconWidgetState extends State<ComposeBottomIconWidget> {
 
   void setImage(ImageSource source) {
     ImagePicker()
-        .pickImage(source: source, imageQuality: 20)
+        .pickMedia(imageQuality: 20)
         .then((XFile? file) {
       setState(() {
         // _image = file;

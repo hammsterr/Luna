@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/rippleButton.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/page/profile/profilePage.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/rippleButton.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 
 class UserListWidget extends StatelessWidget {
@@ -72,7 +72,7 @@ class UserTile extends StatelessWidget {
   /// Return empty string for default bio
   /// Max length of bio is 100
   String? getBio(String? bio) {
-    if (bio != null && bio.isNotEmpty && bio != "Edit profile to update bio") {
+    if (bio != null && bio.isNotEmpty && bio != "Привет мир!") {
       if (bio.length > 100) {
         bio = bio.substring(0, 100) + '...';
         return bio;
@@ -162,7 +162,7 @@ class UserTile extends StatelessWidget {
                       borderRadius: BorderRadius.circular(25),
                     ),
                     child: Text(
-                      isFollow ? 'Following' : 'Follow',
+                      isFollow ? 'Вы подписаны' : 'Подписаться',
                       style: TextStyle(
                         color: isFollow ? TwitterColor.white : Colors.blue,
                         fontSize: 12,

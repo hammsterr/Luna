@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/ui/page/settings/widgets/headerWidget.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customAppBar.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 
 class AccessibilityPage extends StatelessWidget {
   const AccessibilityPage({Key? key}) : super(key: key);
@@ -50,14 +50,14 @@ class AccessibilityPage extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 15),
-            child: TitleText('Data preference'),
+            child: TitleText('Настройки сети (не реализовано)'),
           ),
           const Divider(height: 0),
-          _row("Mobile data & Wi-Fi"),
+          _row("Мобильный трафик и WiFi"),
           const Divider(height: 0),
-          _row("Wi-Fi only"),
+          _row("Только WiFi"),
           const Divider(height: 0),
-          _row("Never"),
+          _row("Никогда"),
         ],
       ),
     );
@@ -80,12 +80,12 @@ class AccessibilityPage extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: TitleText('Dark mode appearance'),
+            child: TitleText('Режим темной темы'),
           ),
           const Divider(height: 0),
-          _row("Dim"),
+          _row("Тусклый"),
           const Divider(height: 0),
-          _row("Light out"),
+          _row("Темный"),
         ],
       ),
     );
@@ -111,7 +111,7 @@ class AccessibilityPage extends StatelessWidget {
       appBar: CustomAppBar(
         isBackButton: true,
         title: customTitleText(
-          'Accessibility',
+          'Доступность',
         ),
       ),
       body: ListView(

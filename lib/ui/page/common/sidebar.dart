@@ -1,16 +1,23 @@
+import 'package:Luna/ui/page/common/updateApp.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/constant.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/bookmark/bookmarkPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/follow/followerListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/follow/followingListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/qrCode/scanner.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
+import 'package:Luna/helper/constant.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/page/bookmark/bookmarkPage.dart';
+import 'package:Luna/ui/page/profile/follow/followerListPage.dart';
+import 'package:Luna/ui/page/profile/follow/followingListPage.dart';
+import 'package:Luna/ui/page/profile/profilePage.dart';
+import 'package:Luna/ui/page/profile/qrCode/scanner.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/url_text/customUrlText.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
+import '../../../helper/utility.dart';
+import '../../../state/ThemeState.dart';
 
 class SidebarMenu extends StatefulWidget {
   const SidebarMenu({Key? key, this.scaffoldKey}) : super(key: key);
@@ -24,12 +31,13 @@ class SidebarMenu extends StatefulWidget {
 class _SidebarMenuState extends State<SidebarMenu> {
   Widget _menuHeader() {
     final state = context.watch<AuthState>();
+
     if (state.userModel == null) {
       return ConstrainedBox(
         constraints: const BoxConstraints(minWidth: 200, minHeight: 100),
         child: Center(
           child: Text(
-            'Login to continue',
+            'Сначала авторизуйтесь',
             style: TextStyles.onPrimaryTitleText,
           ),
         ),
@@ -102,10 +110,10 @@ class _SidebarMenuState extends State<SidebarMenu> {
                     width: 17,
                   ),
                   _textButton(context, state.userModel!.getFollower,
-                      ' Followers', 'FollowerListPage'),
+                      ' Подписчики', 'FollowerListPage'),
                   const SizedBox(width: 10),
                   _textButton(context, state.userModel!.getFollowing,
-                      ' Following', 'FollowingListPage'),
+                      ' Подписки', 'FollowingListPage'),
                 ],
               ),
             ),
@@ -190,7 +198,11 @@ class _SidebarMenuState extends State<SidebarMenu> {
     );
   }
 
+
+
   Positioned _footer() {
+
+    bool isDarkModeEnabled;
     return Positioned(
       bottom: 0,
       right: 0,
@@ -204,18 +216,26 @@ class _SidebarMenuState extends State<SidebarMenu> {
                 width: 10,
                 height: 45,
               ),
-              customIcon(context,
-                  icon: AppIcon.bulbOn,
-                  isTwitterIcon: true,
-                  size: 25,
-                  iconColor: TwitterColor.dodgeBlue),
+              TextButton(
+                child: Text('Luna 1.0.8(3)'), // Замените на актуальную версию вашего приложения
+                 onPressed: () { Utility.launchURL("https://hamystore.web.app/-Niyt7GrEwYyGBlYJKr-"); },
+                  onLongPress: () {
+
+                    Navigator.push(
+                      context,
+                      UpdateApp.getRoute(),
+                    );
+                  },
+
+              ),
+
               const Spacer(),
               TextButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      ScanScreen.getRoute(
-                          context.read<AuthState>().profileUserModel!));
+                    context,
+                    ScanScreen.getRoute(context.read<AuthState>().profileUserModel!),
+                  );
                 },
                 child: Image.asset(
                   "assets/images/qr.png",
@@ -232,11 +252,11 @@ class _SidebarMenuState extends State<SidebarMenu> {
       ),
     );
   }
-
   void _logOut() {
     final state = Provider.of<AuthState>(context, listen: false);
     Navigator.pop(context);
     state.logoutCallback();
+
   }
 
   void _navigateTo(String path) {
@@ -259,30 +279,30 @@ class _SidebarMenuState extends State<SidebarMenu> {
                     child: _menuHeader(),
                   ),
                   const Divider(),
-                  _menuListRowButton('Profile',
+                  _menuListRowButton('Профиль',
                       icon: AppIcon.profile, isEnable: true, onPressed: () {
                     var state = context.read<AuthState>();
                     Navigator.push(
                         context, ProfilePage.getRoute(profileId: state.userId));
                   }),
                   _menuListRowButton(
-                    'Bookmark',
+                    'Закладки',
                     icon: AppIcon.bookmark,
                     isEnable: true,
                     onPressed: () {
                       Navigator.push(context, BookmarkPage.getRoute());
                     },
                   ),
-                  _menuListRowButton('Lists', icon: AppIcon.lists),
-                  _menuListRowButton('Moments', icon: AppIcon.moments),
+                  //_menuListRowButton('Lists', icon: AppIcon.lists),
+                  //_menuListRowButton('Клипы', icon: AppIcon.moments),
                   const Divider(),
-                  _menuListRowButton('Settings and privacy', isEnable: true,
+                  _menuListRowButton('Настройки', isEnable: true,
                       onPressed: () {
                     _navigateTo('SettingsAndPrivacyPage');
                   }),
-                  _menuListRowButton('Help Center'),
+                  //_menuListRowButton('Помощь'),
                   const Divider(),
-                  _menuListRowButton('Logout',
+                  _menuListRowButton('Выйти из аккаунта',
                       icon: null, onPressed: _logOut, isEnable: true),
                 ],
               ),

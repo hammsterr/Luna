@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/customRoute.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/widgets/cache_image.dart';
-import 'package:flutter_twitter_clone/widgets/customFlatButton.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
+import 'package:Luna/helper/customRoute.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/widgets/cache_image.dart';
+import 'package:Luna/widgets/customFlatButton.dart';
+import 'package:Luna/widgets/customWidgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +26,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   File? _image;
   File? _banner;
   late TextEditingController _name;
+  late TextEditingController _nick;
   late TextEditingController _bio;
   late TextEditingController _location;
   late TextEditingController _dob;
@@ -34,11 +35,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   void initState() {
     _name = TextEditingController();
+    _nick = TextEditingController();
     _bio = TextEditingController();
     _location = TextEditingController();
     _dob = TextEditingController();
     AuthState state = Provider.of<AuthState>(context, listen: false);
     _name.text = state.userModel?.displayName ?? '';
+    _nick.text = state.userModel?.userName ?? '';
     _bio.text = state.userModel?.bio ?? '';
     _location.text = state.userModel?.location ?? '';
     _dob.text = Utility.getDob(state.userModel?.dob);
@@ -48,6 +51,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   void dispose() {
     _name.dispose();
+    _nick.dispose();
     _bio.dispose();
     _location.dispose();
     _dob.dispose();
@@ -71,12 +75,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ],
           ),
         ),
-        _entry('Name', controller: _name),
-        _entry('Bio', controller: _bio),
-        _entry('Location', controller: _location),
+        _entry('Имя', controller: _name),
+        _entry('Ник', controller: _nick),
+        _entry('Био', controller: _bio),
+        _entry('Локация', controller: _location),
         InkWell(
           onTap: showCalender,
-          child: _entry('Date of birth', enabled: false, controller: _dob),
+          child: _entry('Дата рождения', enabled: false, controller: _dob),
         )
       ],
     );
@@ -138,7 +143,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     fit: BoxFit.fill, width: MediaQuery.of(context).size.width)
                 : CacheImage(
                     path: authState.userModel!.bannerImage ??
-                        'https://pbs.twimg.com/profile_banners/457684585/1510495215/1500x500',
+                        'https://xn----7sbcgrydczc.xn--p1ai/src/img/lower/priroda/priroda-luna/priroda-luna-5.png',
                     fit: BoxFit.fill),
             Center(
               child: Container(
@@ -204,6 +209,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     var model = state.userModel!.copyWith(
       key: state.userModel!.userId,
       displayName: state.userModel!.displayName,
+      userName: state.userModel!.userName,
       bio: state.userModel!.bio,
       contact: state.userModel!.contact,
       dob: state.userModel!.dob,
@@ -215,6 +221,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
     if (_name.text.isNotEmpty) {
       model.displayName = _name.text;
+    }
+    if (_nick.text.isNotEmpty) {
+      model.userName = _nick.text;
     }
     if (_bio.text.isNotEmpty) {
       model.bio = _bio.text;
@@ -251,38 +260,40 @@ class _EditProfilePageState extends State<EditProfilePage> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 100,
-          padding: const EdgeInsets.all(10),
+          height: 140,
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: <Widget>[
               const Text(
-                'Pick an image',
+                'Выберите фото',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               Row(
                 children: <Widget>[
                   Expanded(
                     child: CustomFlatButton(
-                      label: "Use Camera",
-                      borderRadius: 5,
+                      label: "Камера",
+                      borderRadius: 15,
                       onPressed: () {
                         getImage(context, ImageSource.camera, onImageSelected);
                       },
                     ),
                   ),
                   const SizedBox(
-                    width: 10,
+                    width: 15,
                   ),
                   Expanded(
                     child: CustomFlatButton(
-                      label: "Use Gallery",
-                      borderRadius: 5,
+                      label: "Галерея",
+
+                      borderRadius: 15,
                       onPressed: () {
                         getImage(context, ImageSource.gallery, onImageSelected);
                       },
                     ),
-                  )
+                  ),
+
                 ],
               )
             ],
@@ -303,6 +314,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
     });
   }
 
+  // TODO
+  // eraseImage(BuildContext context, Function(File) onImageSelected) {
+  //   // Загрузка изображения из ресурсов приложения
+  //   File imageFile = File('assets/transparent.png');
+  //
+  //   // Вызов функции обратного вызова с выбранным изображением
+  //   onImageSelected(imageFile);
+  //
+  //   // Закрытие текущего экрана
+  //   Navigator.pop(context);
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -311,14 +334,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.blue),
         title: customTitleText(
-          'Profile Edit',
+          'Редактирование профиля',
         ),
         actions: <Widget>[
           InkWell(
             onTap: _submitButton,
             child: const Center(
               child: Text(
-                'Save',
+                'Сохранить',
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 17,
@@ -335,4 +358,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
     );
   }
+
+
 }

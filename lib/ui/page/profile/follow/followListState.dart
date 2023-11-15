@@ -1,9 +1,9 @@
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/shared_prefrence_helper.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/appState.dart';
-import 'package:flutter_twitter_clone/ui/page/common/locator.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/helper/shared_prefrence_helper.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/appState.dart';
+import 'package:Luna/ui/page/common/locator.dart';
 
 enum StateType { following, follower }
 
@@ -104,7 +104,7 @@ class FollowListState extends AppState {
               profilePic: _currentUser!.profilePic,
               isVerified: _currentUser!.isVerified,
               userId: _currentUser!.userId,
-              bio: _currentUser!.bio == "Edit profile to update bio"
+              bio: _currentUser!.bio == "Привет мир!"
                   ? ""
                   : _currentUser!.bio,
               userName: _currentUser!.userName)

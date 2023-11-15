@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/page/settings/widgets/headerWidget.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customAppBar.dart';
+import 'package:Luna/widgets/customWidgets.dart';
 import 'package:provider/provider.dart';
 
 import 'widgets/settingsRowWidget.dart';
@@ -20,20 +20,20 @@ class SettingsAndPrivacyPage extends StatelessWidget {
       appBar: CustomAppBar(
         isBackButton: true,
         title: customTitleText(
-          'Settings and privacy',
+          'Настройки и приватность',
         ),
       ),
       body: ListView(
         children: <Widget>[
           HeaderWidget(user.userName),
           const SettingRowWidget(
-            "Account",
+            "Аккаунт",
             navigateTo: 'AccountSettingsPage',
           ),
           const Divider(height: 0),
-          const SettingRowWidget("Privacy and Policy",
+          const SettingRowWidget("Приватность и безопасность",
               navigateTo: 'PrivacyAndSaftyPage'),
-          const SettingRowWidget("Notification",
+          const SettingRowWidget("Уведомления",
               navigateTo: 'NotificationPage'),
           const SettingRowWidget("Content prefrences",
               navigateTo: 'ContentPrefrencePage'),
@@ -48,7 +48,10 @@ class SettingsAndPrivacyPage extends StatelessWidget {
               navigateTo: 'AccessibilityPage'),
           const SettingRowWidget("Proxy", navigateTo: "ProxyPage"),
           const SettingRowWidget(
-            "About Fwitter",
+            "Проверить обновления",
+            navigateTo: "SplashPage"),
+          const SettingRowWidget(
+            "О Луне",
             navigateTo: "AboutPage",
           ),
           const SettingRowWidget(
@@ -56,7 +59,7 @@ class SettingsAndPrivacyPage extends StatelessWidget {
             showDivider: false,
             vPadding: 10,
             subtitle:
-                'These settings affect all of your Fwitter accounts on this devce.',
+                'Это настройки Луны. \nМногие функции находятся в разработке. \nСледите за обновлениями в проекте на гитхабе',
           )
         ],
       ),

@@ -1,26 +1,30 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/push_notification_model.dart';
-import 'package:flutter_twitter_clone/resource/push_notification_service.dart';
-import 'package:flutter_twitter_clone/state/appState.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/chats/chatState.dart';
-import 'package:flutter_twitter_clone/state/suggestionUserState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/state/notificationState.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/feedPage.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/feedPostDetail.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/suggestedUsers.dart';
-import 'package:flutter_twitter_clone/ui/page/message/chatListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/widgets/bottomMenuBar/bottomMenuBar.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/push_notification_model.dart';
+import 'package:Luna/resource/push_notification_service.dart';
+import 'package:Luna/state/appState.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/state/chats/chatState.dart';
+import 'package:Luna/state/suggestionUserState.dart';
+import 'package:Luna/state/feedState.dart';
+import 'package:Luna/state/notificationState.dart';
+import 'package:Luna/state/searchState.dart';
+import 'package:Luna/ui/page/feed/feedPage.dart';
+import 'package:Luna/ui/page/feed/feedPostDetail.dart';
+import 'package:Luna/ui/page/feed/suggestedUsers.dart';
+import 'package:Luna/ui/page/message/chatListPage.dart';
+import 'package:Luna/ui/page/profile/profilePage.dart';
+import 'package:Luna/widgets/bottomMenuBar/bottomMenuBar.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'common/locator.dart';
 import 'common/sidebar.dart';
@@ -31,9 +35,11 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
+
 }
 
-class _HomePageState extends State<HomePage> {
+
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   int pageIndex = 0;
@@ -41,7 +47,9 @@ class _HomePageState extends State<HomePage> {
   late StreamSubscription<PushNotificationModel> pushNotificationSubscription;
   @override
   void initState() {
+
     initDynamicLinks();
+    initializeDateFormatting('ru');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       var state = Provider.of<AppState>(context, listen: false);
       state.setPageIndex = 0;
@@ -51,9 +59,55 @@ class _HomePageState extends State<HomePage> {
       initNotification();
       initChat();
     });
-
+    WidgetsBinding.instance.addObserver(this);
+    setStatus("В сети");
     super.initState();
+    checkAndCreateDocument(_auth.currentUser!.uid);
   }
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  void setStatus(String status) async {
+    try {
+      await _firestore.collection("users").doc(_auth.currentUser!.uid).update({
+        "status": status,
+      });
+    } catch (e) {
+      print("Error updating status: $e");
+    }
+  }
+
+  void checkAndCreateDocument(String uid) async {
+    DocumentSnapshot documentSnapshot =
+    await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+    if (!documentSnapshot.exists) {
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        'uid': _auth.currentUser?.uid,
+        'Name': _auth.currentUser?.displayName,
+        'status': 'В сети',
+      });
+      cprint("Проверка выполнена");
+    }
+  }
+
+  var TimeNow = DateTime.now().toString();
+  var FormatedTimeClock = DateFormat.Hm('ru').format(DateTime.now().toLocal());
+  var FormatedDate = DateFormat("dd MMMM yyyy", "ru").format(DateTime.now().toLocal());
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      setStatus("В сети");
+      checkAndCreateDocument(_auth.currentUser!.uid);
+    } else {
+      setStatus(FormatedTimeClock + ' - ' + FormatedDate);
+      cprint("Вышел из сети: " + FormatedTimeClock + ' ' + FormatedDate);
+      print("Вышел из сети: " + FormatedTimeClock + ' ' + FormatedDate);
+    }
+  }
+
 
   @override
   void dispose() {
@@ -210,10 +264,10 @@ class _HomePageState extends State<HomePage> {
     final state = context.watch<AuthState>();
     context.read<SuggestionsState>().initUser(state.userModel);
 
-    if (context
+  /*  if (context
         .select<SuggestionsState, bool>((state) => state.displaySuggestions)) {
       return SuggestedUsers();
-    }
+    }*/
 
     return Scaffold(
       key: _scaffoldKey,

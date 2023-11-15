@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:flutter_twitter_clone/model/user.dart';
+import 'package:Luna/model/user.dart';
 
 class FeedModel {
   String? key;
@@ -16,8 +16,7 @@ class FeedModel {
   String? imagePath;
   List<String>? tags;
   List<String?>? replyTweetKeyList;
-  String?
-      lanCode; //Saving the language of the tweet so to not translate to check which language
+//Saving the language of the tweet so to not translate to check which language
   UserModel? user;
   FeedModel(
       {this.key,
@@ -33,8 +32,9 @@ class FeedModel {
       this.user,
       this.replyTweetKeyList,
       this.parentkey,
-      this.lanCode,
       this.childRetwetkey});
+
+  get hasVideo => null;
   toJson() {
     return {
       "userId": userId,
@@ -49,7 +49,7 @@ class FeedModel {
       "replyTweetKeyList": replyTweetKeyList,
       "user": user == null ? null : user!.toJson(),
       "parentkey": parentkey,
-      "lanCode": lanCode,
+
       "childRetwetkey": childRetwetkey
     };
   }
@@ -64,7 +64,6 @@ class FeedModel {
     imagePath = map['imagePath'];
     createdAt = map['createdAt'];
     imagePath = map['imagePath'];
-    lanCode = map['lanCode'];
     user = UserModel.fromJson(map['user']);
     parentkey = map['parentkey'];
     childRetwetkey = map['childRetwetkey'];

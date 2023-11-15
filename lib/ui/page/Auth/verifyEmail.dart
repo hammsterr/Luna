@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/emptyList.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/emptyList.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 
 class VerifyEmailPage extends StatefulWidget {
@@ -28,16 +28,16 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
         children: state.user!.emailVerified
             ? <Widget>[
                 NotifyText(
-                  title: 'Your email address is verified',
+                  title: 'Ваш email подтвержден',
                   subTitle:
-                      'You have got your blue tick on your name. Cheers !!',
+                      'Теперь у вас есть галочка!!',
                 ),
               ]
             : <Widget>[
                 NotifyText(
-                  title: 'Verify your email address',
+                  title: 'Подтвердите свой email',
                   subTitle:
-                      'Send email verification email link to ${state.user!.email} to verify address',
+                      'Отправим ссылку на ${state.user!.email} для подтверждения',
                 ),
                 const SizedBox(
                   height: 30,
@@ -63,7 +63,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
             onPressed: _submit,
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: const TitleText(
-              'Send Link',
+              'Отправить',
               color: Colors.white,
             ),
           ),
@@ -84,7 +84,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       backgroundColor: TwitterColor.mystic,
       appBar: AppBar(
         title: customText(
-          'Email Verification',
+          'Подтверждение email',
           context: context,
           style: const TextStyle(fontSize: 20),
         ),

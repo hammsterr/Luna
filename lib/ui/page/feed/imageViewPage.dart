@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/constant.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/widgets/cache_image.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/widgets/tweetIconsRow.dart';
+import 'package:Luna/helper/constant.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/state/feedState.dart';
+import 'package:Luna/widgets/cache_image.dart';
+import 'package:Luna/widgets/tweet/widgets/tweetIconsRow.dart';
 import 'package:provider/provider.dart';
 
 class ImageViewPge extends StatefulWidget {
@@ -136,16 +136,22 @@ class _ImageViewPgeState extends State<ImageViewPge> {
 
   Widget _imageFeed(String? _image) {
     return _image == null
-        ? Container()
+        ? Container(
+      alignment: Alignment.center,
+      child: Text(
+        'Нет фото',
+        style: TextStyle(fontSize: 26),
+      ),
+    )
         : Container(
-            alignment: Alignment.center,
-            child: InteractiveViewer(
-              child: CacheImage(
-                path: _image,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          );
+      alignment: Alignment.center,
+      child: InteractiveViewer(
+        child: CacheImage(
+          path: _image,
+          fit: BoxFit.fitWidth,
+        ),
+      ),
+    );
   }
 
   void _submitButton() {

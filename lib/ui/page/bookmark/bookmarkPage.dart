@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/state/bookmarkState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/emptyList.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/tweet.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/state/bookmarkState.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customAppBar.dart';
+import 'package:Luna/widgets/newWidget/emptyList.dart';
+import 'package:Luna/widgets/tweet/tweet.dart';
 import 'package:provider/provider.dart';
 
 class BookmarkPage extends StatelessWidget {
@@ -30,7 +30,7 @@ class BookmarkPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: TwitterColor.mystic,
       appBar: CustomAppBar(
-        title: Text("Bookmark", style: TextStyles.titleStyle),
+        title: Text("Закладки", style: TextStyles.titleStyle),
         isBackButton: true,
       ),
       body: const BookmarkPageBody(),
@@ -44,10 +44,24 @@ class BookmarkPageBody extends StatelessWidget {
   Widget _tweet(BuildContext context, FeedModel model) {
     return Container(
       color: Colors.white,
-      child: Tweet(
-        model: model,
-        type: TweetType.Tweet,
-        scaffoldKey: GlobalKey<ScaffoldState>(),
+      child: Stack(
+        children: [
+          Tweet(
+            model: model,
+            type: TweetType.Tweet,
+            scaffoldKey: GlobalKey<ScaffoldState>(),
+          ),
+          Positioned(
+            top: 10,
+            right: 10,
+            child: IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                Provider.of<BookmarkState>(context, listen: false).removeBookmark(model.key as String);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -65,8 +79,8 @@ class BookmarkPageBody extends StatelessWidget {
       return const Padding(
         padding: EdgeInsets.symmetric(horizontal: 30),
         child: EmptyList(
-          'No Bookmark available yet',
-          subTitle: 'When new bookmark found, they\'ll show up here.',
+          'Закладок нет',
+          subTitle: 'Когда вы добавите пост в закладки, \'он появится здесь.',
         ),
       );
     }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/customLoader.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/rippleButton.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/widgets/newWidget/customLoader.dart';
+import 'package:Luna/widgets/newWidget/rippleButton.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 
 class GoogleLoginButton extends StatelessWidget {
   const GoogleLoginButton({
@@ -26,7 +26,7 @@ class GoogleLoginButton extends StatelessWidget {
         if (loginCallback != null) loginCallback!();
       } else {
         loader.hideLoader();
-        cprint('Unable to login', errorIn: '_googleLoginButton');
+        cprint('Невозможно авторизоваться', errorIn: '_googleLoginButton');
       }
     });
   }
@@ -60,7 +60,7 @@ class GoogleLoginButton extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             const TitleText(
-              'Continue with Google',
+              'Продолжить с Google',
               color: Colors.black54,
             ),
           ],

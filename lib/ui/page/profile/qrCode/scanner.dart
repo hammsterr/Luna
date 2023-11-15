@@ -5,10 +5,10 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/ui/page/profile/profilePage.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -173,7 +173,7 @@ class _ScanState extends State<ScanScreen> with SingleTickerProviderStateMixin {
       setState(() {
         result = scanData;
       });
-      if (result.code!.contains("fwitter/profile/")) {
+      if (result.code!.contains("Luna/profile/")) {
         isFound = true;
         Navigator.pop(context);
         var userId = result.code!.split("/")[2];
@@ -209,12 +209,12 @@ class _QrCodeState extends State<QrCode> {
       const Color(0xff1FE2D7),
       const Color(0xffC13E6B),
       const Color(0xffFF7878),
-      const Color(0xff07B7A6),
-      const Color(0xff1F7ACD),
-      const Color(0xffBB78FF),
-      const Color(0xffF14CD7),
-      const Color(0xffFF5757),
-      const Color(0xff28B446),
+      const Color(0xff09ffe6),
+      const Color(0xff0084ff),
+      const Color(0xff9329ff),
+      const Color(0xffff25dd),
+      const Color(0xffff0000),
+      const Color(0xff04fc3d),
     ];
 
     Random ran = Random.secure();
@@ -248,7 +248,7 @@ class _QrCodeState extends State<QrCode> {
                       borderRadius: BorderRadius.circular(10)),
                   padding: const EdgeInsets.all(22),
                   child: QrImageView(
-                    data: "fwitter/profile/${widget.user.userId}",
+                    data: "Luna/profile/${widget.user.userId}",
                     embeddedImageStyle:
                         QrEmbeddedImageStyle(size: const Size(60, 60)),
                     version: QrVersions.auto,

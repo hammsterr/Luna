@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/customRoute.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:Luna/helper/customRoute.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/ui/page/profile/profilePage.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/ui/theme/theme.dart';
 
 class ProfileImageView extends StatelessWidget {
   const ProfileImageView({Key? key, required this.avatar}) : super(key: key);
@@ -23,20 +23,20 @@ class ProfileImageView extends StatelessWidget {
           isEnable: true),
       Choice(title: 'Save', icon: Icons.save),
     ];
-    return Scaffold(
-      backgroundColor: TwitterColor.white,
-      appBar: AppBar(
-        actions: <Widget>[
-          PopupMenuButton<Choice>(
-            onSelected: (d) {
-              switch (d.title) {
-                case "Share image link":
-                  Utility.share(avatar);
-                  break;
-                case "Open in browser":
-                  Utility.launchURL(avatar);
-                  break;
-                case "Save":
+            return Scaffold(
+                    backgroundColor: TwitterColor.white,
+                    appBar: AppBar(
+                      actions: <Widget>[
+                        PopupMenuButton<Choice>(
+                          onSelected: (d) {
+                            switch (d.title) {
+                              case "Share image link":
+                                Utility.share(avatar);
+                                break;
+                              case "Open in browser":
+                                Utility.launchURL(avatar);
+                                break;
+                              case "Save":
                   break;
               }
             },

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/state/notificationState.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/feedPostDetail.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/feedState.dart';
+import 'package:Luna/state/notificationState.dart';
+import 'package:Luna/ui/page/feed/feedPostDetail.dart';
+import 'package:Luna/ui/page/profile/profilePage.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
+import 'package:Luna/widgets/url_text/customUrlText.dart';
 import 'package:provider/provider.dart';
 
 class PostLikeTile extends StatelessWidget {
@@ -36,6 +36,17 @@ class PostLikeTile extends StatelessWidget {
       );
     }
 
+
+    String _getPeopleWord(int count) {
+      if (count % 10 == 1 && count % 100 != 11) {
+        return 'человек оценил';
+      } else if (count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20)) {
+        return 'человека оценили';
+      } else {
+        return 'людей оценили';
+      }
+    }
+
     var col = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -54,12 +65,12 @@ class PostLikeTile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 60, bottom: 5, top: 5),
           child: TitleText(
-            '$length people like your Tweet',
+            '${length} ${_getPeopleWord(length)} ваш пост',
             fontSize: 18,
             color: Colors.black87,
             fontWeight: FontWeight.w500,
           ),
-        )
+        ),
       ],
     );
     return col;

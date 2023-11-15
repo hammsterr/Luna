@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:Luna/state/searchState.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customAppBar.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 
 class TrendsPage extends StatelessWidget {
@@ -49,18 +49,18 @@ class TrendsPage extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: TitleText('Sort user list'),
+            child: TitleText('Сортировка списка'),
           ),
           const Divider(height: 0),
-          _row(context, "Verified user", SortUser.Verified),
+          _row(context, "Верифицированные", SortUser.Verified),
           const Divider(height: 0),
-          _row(context, "Alphabetically", SortUser.Alphabetically),
+          _row(context, "По алфавиту", SortUser.Alphabetically),
           const Divider(height: 0),
-          _row(context, "Newest user", SortUser.Newest),
+          _row(context, "Новые пользователи", SortUser.Newest),
           const Divider(height: 0),
-          _row(context, "Oldest user", SortUser.Oldest),
+          _row(context, "Давние пользователи", SortUser.Oldest),
           const Divider(height: 0),
-          _row(context, "Popular User", SortUser.MaxFollower),
+          _row(context, "Популярные пользователи", SortUser.MaxFollower),
         ],
       ),
     );

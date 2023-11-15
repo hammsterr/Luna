@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/ui/page/Auth/signup.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customFlatButton.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/ui/page/Auth/signup.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customFlatButton.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 import '../homePage.dart';
 import 'signin.dart';
@@ -22,7 +22,7 @@ class _WelcomePageState extends State<WelcomePage> {
       margin: const EdgeInsets.symmetric(vertical: 15),
       width: MediaQuery.of(context).size.width,
       child: CustomFlatButton(
-        label: "Create Account",
+        label: "Создать аккаунт",
         onPressed: () {
           var state = Provider.of<AuthState>(context, listen: false);
           Navigator.push(
@@ -32,6 +32,25 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
           );
         },
+        borderRadius: 30,
+      ),
+    );
+  }
+  Widget _loginButton() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 15),
+      width: MediaQuery.of(context).size.width,
+      child: CustomFlatButton(
+        label: "Войти",
+        onPressed: () {
+          var state = Provider.of<AuthState>(context, listen: false);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  SignIn(loginCallback: state.getCurrentUser),
+            ),
+          );        },
         borderRadius: 30,
       ),
     );
@@ -46,54 +65,24 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            const Spacer(),
             SizedBox(
               width: MediaQuery.of(context).size.width - 80,
-              height: 40,
+              height: 100,
               child: Image.asset('assets/images/icon-480.png'),
             ),
             const Spacer(),
             const TitleText(
-              'See what\'s happening in the world right now.',
-              fontSize: 25,
+              'Делитесь своими мыслями',
+              fontSize: 20,
             ),
             const SizedBox(
               height: 20,
             ),
             _submitButton(),
+            _loginButton(),
             const Spacer(),
-            Wrap(
-              alignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: <Widget>[
-                const TitleText(
-                  'Have an account already?',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300,
-                ),
-                InkWell(
-                  onTap: () {
-                    var state = Provider.of<AuthState>(context, listen: false);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            SignIn(loginCallback: state.getCurrentUser),
-                      ),
-                    );
-                  },
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 2, vertical: 10),
-                    child: TitleText(
-                      ' Log in',
-                      fontSize: 14,
-                      color: TwitterColor.dodgeBlue,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                )
-              ],
-            ),
+
             const SizedBox(height: 20)
           ],
         ),

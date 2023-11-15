@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsAppbar.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/ui/page/settings/widgets/headerWidget.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsAppbar.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 class ContentPrefrencePage extends StatelessWidget {
@@ -16,38 +16,38 @@ class ContentPrefrencePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: TwitterColor.white,
       appBar: SettingsAppBar(
-        title: 'Content preferences',
+        title: 'Настройки контента',
         subtitle: user.userName,
       ),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: const <Widget>[
-          HeaderWidget('Explore'),
+          HeaderWidget('Поиск'),
           SettingRowWidget(
-            "Trends",
+            "Тренды",
             navigateTo: 'TrendsPage',
           ),
           Divider(height: 0),
           SettingRowWidget(
-            "Search settings",
+            "Поиск настроек",
             navigateTo: null,
           ),
           HeaderWidget(
-            'Languages',
+            'Языки',
             secondHeader: true,
           ),
           SettingRowWidget(
-            "Recommendations",
+            "Рекомендации",
             vPadding: 15,
             subtitle:
-                "Select which language you want recommended Tweets, people, and trends to include",
+                "Выберите язык контента",
           ),
           HeaderWidget(
-            'Safety',
+            'Безопасность',
             secondHeader: true,
           ),
-          SettingRowWidget("Blocked accounts"),
-          SettingRowWidget("Muted accounts"),
+          SettingRowWidget("Заблокированные"),
+          SettingRowWidget("Заглушенные"),
         ],
       ),
     );

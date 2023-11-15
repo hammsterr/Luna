@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsAppbar.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/page/settings/widgets/headerWidget.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsAppbar.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:Luna/ui/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 class AccountSettingsPage extends StatelessWidget {
@@ -21,32 +21,32 @@ class AccountSettingsPage extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          const HeaderWidget('Login and security'),
+          const HeaderWidget('Вход и защита'),
           SettingRowWidget(
-            "Username",
+            "Ник",
             subtitle: user.userName,
           ),
           const Divider(height: 0),
           SettingRowWidget(
-            "Phone",
+            "Телефон",
             subtitle: user.contact,
           ),
           SettingRowWidget(
-            "Email address",
+            "Email",
             subtitle: user.email,
             navigateTo: 'VerifyEmailPage',
           ),
-          const SettingRowWidget("Password"),
-          const SettingRowWidget("Security"),
+          const SettingRowWidget("Пароль"),
+          const SettingRowWidget("Защита"),
           const HeaderWidget(
-            'Data and Permission',
+            'Данные и разрешения',
             secondHeader: true,
           ),
-          const SettingRowWidget("Country"),
-          const SettingRowWidget("Your Fwitter data"),
-          const SettingRowWidget("Apps and sessions"),
+          const SettingRowWidget("Место"),
+          const SettingRowWidget("Ваши данные"),
+          const SettingRowWidget("Приложения"),
           SettingRowWidget(
-            "Log out",
+            "Выход",
             textColor: TwitterColor.ceriseRed,
             onPressed: () {
               Navigator.popUntil(context, ModalRoute.withName('/'));

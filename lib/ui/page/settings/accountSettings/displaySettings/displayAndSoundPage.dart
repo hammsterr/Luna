@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/ui/page/settings/widgets/headerWidget.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customAppBar.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 
 class DisplayAndSoundPage extends StatelessWidget {
   const DisplayAndSoundPage({Key? key}) : super(key: key);
@@ -50,14 +50,14 @@ class DisplayAndSoundPage extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: TitleText('Dark Mode'),
+            child: TitleText('Темная тема'),
           ),
           const Divider(height: 0),
-          _row("On"),
+          _row("Включена"),
           const Divider(height: 0),
-          _row("Off"),
+          _row("Отключена"),
           const Divider(height: 0),
-          _row("Automatic at sunset"),
+          _row("Автоматически при заходе солнца"),
         ],
       ),
     );
@@ -80,12 +80,12 @@ class DisplayAndSoundPage extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: TitleText('Dark mode appearance'),
+            child: TitleText('Режим темной темы'),
           ),
           const Divider(height: 0),
-          _row("Dim"),
+          _row("Тусклый"),
           const Divider(height: 0),
-          _row("Light out"),
+          _row("Темный"),
         ],
       ),
     );
@@ -111,7 +111,7 @@ class DisplayAndSoundPage extends StatelessWidget {
       appBar: CustomAppBar(
         isBackButton: true,
         title: customTitleText(
-          'Display and Sound',
+          'Дисплей и звук',
         ),
       ),
       body: ListView(
@@ -143,7 +143,7 @@ class DisplayAndSoundPage extends StatelessWidget {
           const SettingRowWidget(
             "Emoji",
             subtitle:
-                'Use the Fwitter set instead of your device\'s default set',
+                'Use the Luna set instead of your device\'s default set',
             showDivider: false,
             showCheckBox: false,
           ),
@@ -162,7 +162,7 @@ class DisplayAndSoundPage extends StatelessWidget {
           ),
           const SettingRowWidget(
             "Use in-app browser",
-            subtitle: 'Open external links with Fwitter browser',
+            subtitle: 'Open external links with Luna browser',
             showCheckBox: false,
           ),
         ],

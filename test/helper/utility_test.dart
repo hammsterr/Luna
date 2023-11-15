@@ -1,28 +1,29 @@
-import 'package:flutter_twitter_clone/helper/utility.dart';
+import 'package:Luna/helper/utility.dart';
 import 'package:test/test.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
   group("Check Date time", () {
     test('Check post time', () {
       var date = DateTime.now().toUtc();
       var now = Utility.getChatTime(date.toString());
-      expect(now, "now");
+      expect(now, "только что");
 
       var sec = Utility.getChatTime(date.add(Duration(seconds: -8)).toString());
-      expect(sec, "8 s");
+      expect(sec, "8 сек");
 
       var min = Utility.getChatTime(date.add(Duration(minutes: -8)).toString());
-      expect(min, "8 m");
+      expect(min, "8 мин");
 
       var hour = Utility.getChatTime(date.add(Duration(hours: -8)).toString());
-      expect(hour, "8 h");
+      expect(hour, "8 ч");
 
       var yesterday =
           Utility.getChatTime(date.add(Duration(days: -1)).toString());
-      expect(yesterday, "1d");
+      expect(yesterday, "1 д");
 
       var randomDate = Utility.getChatTime("2020-03-19T14:12:46.286410");
-      expect(randomDate, "19 Mar");
+      expect(randomDate, "19 Мар");
     });
 
     test('Check Social Links', () {

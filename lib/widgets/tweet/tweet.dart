@@ -1,22 +1,26 @@
+import 'dart:io';
+
+import 'package:Luna/widgets/tweet/widgets/tweetVideo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/feedPostDetail.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/widgets/parentTweet.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/widgets/tweetIconsRow.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/custom_link_media_info.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/state/feedState.dart';
+import 'package:Luna/ui/page/feed/feedPostDetail.dart';
+import 'package:Luna/ui/page/profile/profilePage.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
+import 'package:Luna/widgets/tweet/widgets/parentTweet.dart';
+import 'package:Luna/widgets/tweet/widgets/tweetIconsRow.dart';
+import 'package:Luna/widgets/url_text/customUrlText.dart';
+import 'package:Luna/widgets/url_text/custom_link_media_info.dart';
 import 'package:provider/provider.dart';
 
 import '../customWidgets.dart';
 import 'widgets/retweetWidget.dart';
 import 'widgets/tweetImage.dart';
+import 'widgets/tweetVideo.dart';
 
 class Tweet extends StatelessWidget {
   final FeedModel model;
@@ -38,7 +42,7 @@ class Tweet extends StatelessWidget {
       Utility.copyToClipBoard(
           context: context,
           text: model.description ?? "",
-          message: "Tweet copy to clipboard");
+          message: "Пост скопирован");
     }
   }
 
@@ -82,36 +86,43 @@ class Tweet extends StatelessWidget {
           onTap: () {
             onTapTweet(context);
           },
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(
-                  top: type == TweetType.Tweet || type == TweetType.Reply
-                      ? 12
-                      : 0,
-                ),
-                child: type == TweetType.Tweet || type == TweetType.Reply
-                    ? _TweetBody(
-                        isDisplayOnProfile: isDisplayOnProfile,
-                        model: model,
-                        trailing: trailing,
-                        type: type,
-                      )
-                    : _TweetDetailBody(
-                        model: model,
-                        trailing: trailing,
-                        type: type,
-                      ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: TweetImage(
-                  model: model,
-                  type: type,
-                ),
-              ),
-              model.childRetwetkey == null
+    child: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: <Widget>[
+    Container(
+    padding: EdgeInsets.only(
+    top: type == TweetType.Tweet || type == TweetType.Reply ? 12 : 0,
+    ),
+    child: type == TweetType.Tweet || type == TweetType.Reply
+    ? _TweetBody(
+    isDisplayOnProfile: isDisplayOnProfile,
+    model: model,
+    trailing: trailing,
+    type: type,
+    )
+        : _TweetDetailBody(
+    model: model,
+    trailing: trailing,
+    type: type,
+    ),
+    ),
+     Padding(
+    padding: const EdgeInsets.only(right: 16),
+    child: TweetImage(
+    model: model,
+    type: type,
+    ),
+    ),
+    //if (model.hasVideo != null && model.hasVideo) // Add this condition
+    /*Padding(
+    padding: const EdgeInsets.only(right: 16),
+    child: tweetVideo(
+    model: model,
+    ),
+    ),*/
+
+
+    model.childRetwetkey == null
                   ? const SizedBox.shrink()
                   : RetweetWidget(
                       childRetwetkey: model.childRetwetkey!,

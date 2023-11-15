@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/Auth/widget/googleLoginButton.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customFlatButton.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/customLoader.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/page/Auth/widget/googleLoginButton.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customFlatButton.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/customLoader.dart';
 import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
@@ -45,24 +45,24 @@ class _SignInState extends State<SignIn> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const SizedBox(height: 150),
-            _entryField('Enter email', controller: _emailController),
-            _entryField('Enter password',
+            _entryField('Введите email', controller: _emailController),
+            _entryField('Введите пароль',
                 controller: _passwordController, isPassword: true),
             _emailLoginButton(context),
             const SizedBox(height: 20),
-            _labelButton('Forget password?', onPressed: () {
+            _labelButton('Забыли пароль?', onPressed: () {
               Navigator.of(context).pushNamed('/ForgetPasswordPage');
             }),
-            const Divider(
+/*            const Divider(
               height: 30,
-            ),
+            ),*/
             const SizedBox(
               height: 30,
             ),
-            GoogleLoginButton(
+/*            GoogleLoginButton(
               loginCallback: widget.loginCallback!,
               loader: loader,
-            ),
+            ),*/
             const SizedBox(height: 100),
           ],
         ),
@@ -118,7 +118,7 @@ class _SignInState extends State<SignIn> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 35),
       child: CustomFlatButton(
-        label: "Submit",
+        label: "Войти",
         onPressed: _emailLogin,
         borderRadius: 30,
       ),
@@ -143,7 +143,7 @@ class _SignInState extends State<SignIn> {
           Navigator.pop(context);
           widget.loginCallback!();
         } else {
-          cprint('Unable to login', errorIn: '_emailLoginButton');
+          cprint('Невозможно войти', errorIn: '_emailLoginButton');
           loader.hideLoader();
         }
       });
@@ -157,7 +157,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: customText('Sign in',
+        title: customText('Войти',
             context: context, style: const TextStyle(fontSize: 20)),
         centerTitle: true,
       ),

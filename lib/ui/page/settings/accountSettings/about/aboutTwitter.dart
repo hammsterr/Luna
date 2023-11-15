@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/ui/page/settings/widgets/headerWidget.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customAppBar.dart';
+import 'package:Luna/widgets/customWidgets.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({Key? key}) : super(key: key);
@@ -16,62 +16,59 @@ class AboutPage extends StatelessWidget {
       appBar: CustomAppBar(
         isBackButton: true,
         title: customTitleText(
-          'About Fwitter',
+          'О Луне',
         ),
       ),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
           const HeaderWidget(
-            'Help',
+            'Помощь',
             secondHeader: true,
           ),
           SettingRowWidget(
-            "Help Centre",
+            "Помощь",
             vPadding: 0,
             showDivider: false,
             onPressed: () {
               Utility.launchURL(
-                  "https://github.com/TheAlphamerc/flutter_twitter_clone/issues");
+                  "https://github.com/hammsterr/Luna/issues");
             },
           ),
-          const HeaderWidget('Legal'),
+          const HeaderWidget('Оферта'),
           const SettingRowWidget(
-            "Terms of Service",
+            "Правила пользования",
             showDivider: true,
           ),
           const SettingRowWidget(
-            "Privacy policy",
+            "Политика конфиденциальности",
             showDivider: true,
           ),
           const SettingRowWidget(
-            "Cookie use",
+            "Использование куки",
             showDivider: true,
           ),
           SettingRowWidget(
-            "Legal notices",
+            "Лицензии",
             showDivider: true,
             onPressed: () async {
               showLicensePage(
                 context: context,
-                applicationName: 'Fwitter',
-                applicationVersion: '1.0.0',
+                applicationName: 'Luna',
+                applicationVersion: '1.0.8',
                 useRootNavigator: true,
               );
             },
           ),
-          const HeaderWidget('Developer'),
-          SettingRowWidget("Github", showDivider: true, onPressed: () {
-            Utility.launchURL("https://github.com/TheAlphamerc");
+          const HeaderWidget('Разработчик Луны'),
+          SettingRowWidget("Сайт Хомяка", showDivider: true, onPressed: () {
+            Utility.launchURL("https://hamyack.pages.dev");
           }),
-          SettingRowWidget("LinkidIn", showDivider: true, onPressed: () {
-            Utility.launchURL("https://www.linkedin.com/in/thealphamerc/");
+          SettingRowWidget("Гитхаб Хомяка", showDivider: true, onPressed: () {
+            Utility.launchURL("https://github.com/hammsterr");
           }),
-          SettingRowWidget("Twitter", showDivider: true, onPressed: () {
+          SettingRowWidget("Твиттер TheAlphamerc (Создатель шаблона)", showDivider: true, onPressed: () {
             Utility.launchURL("https://twitter.com/TheAlphaMerc");
-          }),
-          SettingRowWidget("Blog", showDivider: true, onPressed: () {
-            Utility.launchURL("https://dev.to/thealphamerc");
           }),
         ],
       ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/customRoute.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/ui/page/common/usersListPage.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/widgets/tweetBottomSheet.dart';
+import 'package:Luna/helper/customRoute.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/state/feedState.dart';
+import 'package:Luna/ui/page/common/usersListPage.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/tweet/widgets/tweetBottomSheet.dart';
 import 'package:provider/provider.dart';
 
 class TweetIconsRow extends StatelessWidget {
@@ -137,7 +137,7 @@ class TweetIconsRow extends StatelessWidget {
             customText(Utility.getPostTime2(model.createdAt),
                 style: TextStyles.textStyle14),
             const SizedBox(width: 10),
-            customText('Fwitter for Android',
+            customText('Luna для Android',
                 style: TextStyle(color: Theme.of(context).primaryColor))
           ],
         ),
@@ -147,10 +147,14 @@ class TweetIconsRow extends StatelessWidget {
   }
 
   Widget _likeCommentWidget(BuildContext context) {
-    bool isLikeAvailable =
-        model.likeCount != null ? model.likeCount! > 0 : false;
+    bool isLikeAvailable = model.likeCount != null ? model.likeCount! > 0 : false;
     bool isRetweetAvailable = model.retweetCount! > 0;
     bool isLikeRetweetAvailable = isRetweetAvailable || isLikeAvailable;
+
+    // Получение формы слова "лайки" в зависимости от количества
+    String likeText = model.likeCount != null ? getLikeText(model.likeCount!) : 'Лайков';
+
+
     return Column(
       children: <Widget>[
         const Divider(
@@ -158,71 +162,71 @@ class TweetIconsRow extends StatelessWidget {
           height: 0,
         ),
         AnimatedContainer(
-          padding:
-              EdgeInsets.symmetric(vertical: isLikeRetweetAvailable ? 12 : 0),
+          padding: EdgeInsets.symmetric(vertical: isLikeRetweetAvailable ? 12 : 0),
           duration: const Duration(milliseconds: 500),
           child: !isLikeRetweetAvailable
               ? const SizedBox.shrink()
               : Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    !isRetweetAvailable
-                        ? const SizedBox.shrink()
-                        : customText(model.retweetCount.toString(),
-                            style:
-                                const TextStyle(fontWeight: FontWeight.bold)),
-                    !isRetweetAvailable
-                        ? const SizedBox.shrink()
-                        : const SizedBox(width: 5),
-                    AnimatedCrossFade(
-                      firstChild: const SizedBox.shrink(),
-                      secondChild: customText('Retweets',
-                          style: TextStyles.subtitleStyle),
-                      crossFadeState: !isRetweetAvailable
-                          ? CrossFadeState.showFirst
-                          : CrossFadeState.showSecond,
-                      duration: const Duration(milliseconds: 800),
-                    ),
-                    !isRetweetAvailable
-                        ? const SizedBox.shrink()
-                        : const SizedBox(width: 20),
-                    InkWell(
-                      onTap: () {
-                        onLikeTextPressed(context);
-                      },
-                      child: AnimatedCrossFade(
-                        firstChild: const SizedBox.shrink(),
-                        secondChild: Row(
-                          children: <Widget>[
-                            customSwitcherWidget(
-                              duraton: const Duration(milliseconds: 300),
-                              child: customText(model.likeCount.toString(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                  key: ValueKey(model.likeCount)),
-                            ),
-                            const SizedBox(width: 5),
-                            customText('Likes', style: TextStyles.subtitleStyle)
-                          ],
-                        ),
-                        crossFadeState: !isLikeAvailable
-                            ? CrossFadeState.showFirst
-                            : CrossFadeState.showSecond,
-                        duration: const Duration(milliseconds: 300),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              !isRetweetAvailable
+                  ? const SizedBox.shrink()
+                  : customText(model.retweetCount.toString(),
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              !isRetweetAvailable ? const SizedBox.shrink() : const SizedBox(width: 5),
+              AnimatedCrossFade(
+                firstChild: const SizedBox.shrink(),
+                secondChild: customText('Репосты', style: TextStyles.subtitleStyle),
+                crossFadeState: !isRetweetAvailable ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                duration: const Duration(milliseconds: 800),
+              ),
+              !isRetweetAvailable ? const SizedBox.shrink() : const SizedBox(width: 20),
+              InkWell(
+                onTap: () {
+                  onLikeTextPressed(context);
+                },
+                child: AnimatedCrossFade(
+                  firstChild: const SizedBox.shrink(),
+                  secondChild: Row(
+                    children: <Widget>[
+                      customSwitcherWidget(
+                        duraton: const Duration(milliseconds: 300),
+                        child: customText(model.likeCount.toString(),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            key: ValueKey(model.likeCount)),
                       ),
-                    )
-                  ],
+                      const SizedBox(width: 5),
+                      customText(likeText, style: TextStyles.subtitleStyle) // Используем форму слова "лайки"
+                    ],
+                  ),
+                  crossFadeState: !isLikeAvailable ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                  duration: const Duration(milliseconds: 300),
                 ),
+              )
+            ],
+          ),
         ),
         !isLikeRetweetAvailable
             ? const SizedBox.shrink()
             : const Divider(
-                endIndent: 10,
-                height: 0,
-              ),
+          endIndent: 10,
+          height: 0,
+        ),
       ],
     );
+  }
+
+  String getLikeText(int likeCount) {
+    if (likeCount == 0) {
+      return 'Лайков';
+    } else if (likeCount == 1) {
+      return 'Лайк';
+    } else if (likeCount >= 2 && likeCount <= 4) {
+      return 'Лайка';
+    } else {
+      return 'Лайков';
+    }
   }
 
   Widget customSwitcherWidget(
@@ -246,11 +250,11 @@ class TweetIconsRow extends StatelessWidget {
     Navigator.of(context).push(
       CustomRoute<bool>(
         builder: (BuildContext context) => UsersListPage(
-          pageTitle: "Liked by",
+          pageTitle: "Лайки",
           userIdsList: model.likeList!.map((userId) => userId).toList(),
-          emptyScreenText: "This tweet has no like yet",
+          emptyScreenText: "Этот пост никто не лайкал(",
           emptyScreenSubTileText:
-              "Once a user likes this tweet, user list will be shown here",
+              "Когда кто-нибудь поставит лайк, он будет в этом списке",
         ),
       ),
     );

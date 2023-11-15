@@ -5,13 +5,14 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/Auth/selectAuthMethod.dart';
-import 'package:flutter_twitter_clone/ui/page/common/updateApp.dart';
-import 'package:flutter_twitter_clone/ui/page/homePage.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/page/Auth/selectAuthMethod.dart';
+import 'package:Luna/ui/page/common/updateApp.dart';
+import 'package:Luna/ui/page/homePage.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
@@ -34,9 +35,10 @@ class _SplashPageState extends State<SplashPage> {
   /// Check if current app is updated app or not
   /// If app is not updated then redirect user to update app screen
   void timer() async {
+    await initializeDateFormatting("ru");
     final isAppUpdated = await _checkAppVersion();
     if (isAppUpdated) {
-      cprint("App is updated");
+      cprint("Луна обновилась!");
       Future.delayed(const Duration(seconds: 1)).then((_) {
         var state = Provider.of<AuthState>(context, listen: false);
         state.getCurrentUser();
@@ -62,9 +64,9 @@ class _SplashPageState extends State<SplashPage> {
       return true;
     } else {
       if (kDebugMode) {
-        cprint("Latest version of app is not installed on your system");
+        cprint("Последняя версия луны установлена!");
         cprint(
-            "This is for testing purpose only. In debug mode update screen will not be open up");
+            "Это только для целей тестирования. В режиме отладки экран обновления открыт не будет");
         cprint(
             "If you are planning to publish app on store then please update app version in firebase config");
         return true;
@@ -100,7 +102,7 @@ class _SplashPageState extends State<SplashPage> {
       return jsonDecode(data) as Map;
     } else {
       cprint(
-          "Please add your app's current version into Remote config in firebase",
+          "Обновите remote conf",
           errorIn: "_getAppVersionFromFirebaseConfig");
       return null;
     }

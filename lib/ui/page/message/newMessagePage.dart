@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/chats/chatState.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/state/chats/chatState.dart';
+import 'package:Luna/state/searchState.dart';
+import 'package:Luna/ui/page/profile/widgets/circular_image.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/customAppBar.dart';
+import 'package:Luna/widgets/customWidgets.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 
 class NewMessagePage extends StatefulWidget {
@@ -76,7 +76,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
           isBackButton: true,
           isBottomLine: true,
           title: customTitleText(
-            'New Message',
+            'Новое сообщение',
           ),
         ),
         body: Consumer<SearchState>(
@@ -88,7 +88,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
                     state.filterByUsername(text);
                   },
                   decoration: InputDecoration(
-                    hintText: "Search for people and groups",
+                    hintText: "Найдите людей и группы",
                     hintStyle: const TextStyle(fontSize: 20),
                     prefixIcon: customIcon(
                       context,

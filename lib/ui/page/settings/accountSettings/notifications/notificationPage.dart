@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsAppbar.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:Luna/model/user.dart';
+import 'package:Luna/ui/page/settings/widgets/headerWidget.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsAppbar.dart';
+import 'package:Luna/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:Luna/state/authState.dart';
+import 'package:Luna/ui/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -16,14 +16,14 @@ class NotificationPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: TwitterColor.white,
       appBar: SettingsAppBar(
-        title: 'Notifications',
+        title: 'Уведомления',
         subtitle: user.userName,
       ),
       body: ListView(
         children: const <Widget>[
-          HeaderWidget('Filters'),
+          HeaderWidget('Фильтры'),
           SettingRowWidget(
-            "Quality filter",
+            "Фильтры качества",
             showCheckBox: true,
             subtitle:
                 'Filter lower-quality from your notifications. This won\'t filter out notifications from people you follow or account you\'ve inteacted with recently.',
@@ -39,13 +39,13 @@ class NotificationPage extends StatelessWidget {
             "Unread notification count badge",
             showCheckBox: false,
             subtitle:
-                'Display a badge with the number of notifications waiting for you inside the Fwitter app.',
+                'Display a badge with the number of notifications waiting for you inside the Luna app.',
           ),
           SettingRowWidget("Push notifications"),
           SettingRowWidget("SMS notifications"),
           SettingRowWidget(
             "Email notifications",
-            subtitle: 'Control when how often Fwitter sends emails to you.',
+            subtitle: 'Control when how often Luna sends emails to you.',
           ),
         ],
       ),

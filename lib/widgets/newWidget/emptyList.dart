@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:Luna/ui/theme/theme.dart';
+import 'package:Luna/widgets/newWidget/title_text.dart';
 
 class EmptyList extends StatelessWidget {
   const EmptyList(this.title, {Key? key, required this.subTitle});

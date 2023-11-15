@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:path/path.dart' as Path;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/state/appState.dart';
+import 'package:Luna/helper/enum.dart';
+import 'package:Luna/helper/utility.dart';
+import 'package:Luna/model/feedModel.dart';
+import 'package:Luna/state/appState.dart';
 
 class TweetBaseState extends AppState {
   /// get [Tweet Detail] from firebase realtime kDatabase
@@ -152,7 +152,7 @@ class TweetBaseState extends AppState {
   }
 
   /// upload [file] to firebase storage and return its  path url
-  Future<String?> uploadFile(File file) async {
+  Future<String?> uploadImage(File file) async {
     try {
       notifyListeners();
       var storageReference = FirebaseStorage.instance
@@ -164,7 +164,7 @@ class TweetBaseState extends AppState {
       var url = await storageReference.getDownloadURL();
       return url;
     } catch (error) {
-      cprint(error, errorIn: 'uploadFile');
+      cprint(error, errorIn: 'uploadImage');
       return null;
     }
   }

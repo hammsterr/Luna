@@ -1,4 +1,4 @@
-## Luna - простая соцсеть [![GitHub stars](https://img.shields.io/github/stars/hammsterr/Luna?style=social)](https://github.com/login?return_to=%2Fhammsterr%Luna) ![GitHub forks](https://img.shields.io/github/forks/hammsterr/Luna?style=social) 
+## Luna - простая соцсеть  <!--[![GitHub stars](https://img.shields.io/github/stars/hammsterr/Luna?style=social)](https://github.com/login?return_to=%2Fhammsterr%Luna) ![GitHub forks](https://img.shields.io/github/forks/hammsterr/Luna?style=social) -->
 
 Делитесь чем-то новым, общайтесь и обсуждайте! 
 
@@ -9,43 +9,13 @@
 </a>
 
 ## Скачать Луну
-пока невозможно
+<a href="hamystore.web.app"><img height="80" src="https://github.com/hammsterr/Luna/blob/24dc55e6bfd08099585c2cbc96c5257f3c29fd77/assets/images/DownloadOnTheStore.png" alt="Скачать"></a>
 
+## Проект
+[Luna ReVanced](https://github.com/users/hammsterr/projects/2)
 
-## Функции
-* Функционал приложения [здесь](https://github.com/TheAlphamerc/Luna/projects/1)
-* Messaging chat section status can be seen at [here](https://github.com/TheAlphamerc/Luna/projects/2)
-
-
-<details>
-   <summary> еще кое что... </summary>
- :boom: Luna app now uses both firebase `realtime` and `firestore` database.:boom:
-* In branch **firetore** Luna uses `Firestore` database for app. 
-* In branch **Master** and **realtime_db** Luna uses `Firebase Realtime` database for app.
-</details>
-
-## Зависимости
-<details>
-     <summary> Спойлер </summary>
-     
-* [intl](https://pub.dev/packages/intl)
-* [uuid](https://pub.dev/packages/uuid)
-* [http](https://pub.dev/packages/http)
-* [share](https://pub.dev/packages/share)
-* [provider](https://pub.dev/packages/provider)
-* [url_launcher](https://pub.dev/packages/url_launcher)
-* [google_fonts](https://pub.dev/packages/google_fonts)
-* [image_picker](https://pub.dev/packages/image_picker)
-* [firebase_auth](https://pub.dev/packages/firebase_auth)
-* [google_sign_in](https://pub.dev/packages/google_sign_in)
-* [firebase_analytics](https://pub.dev/packages/firebase_analytics)
-* [firebase_database](https://pub.dev/packages/firebase_database)
-* [shared_preferences](https://pub.dev/packages/shared_preferences)
-* [flutter_advanced_networkimage](https://pub.dev/packages/flutter_advanced_networkimage)
-     
-</details>
-
-## Скриншоты
+<!--
+## Скриншоты 
 
 
 <details>
@@ -99,155 +69,14 @@ Content Prefrences Page      |  Display Setting Page    |  Data Settings Page   
 
 </details>
 
+-->
 
-## Начало 
-* Инструкции от автора (TheAlphamerc) [Wiki](https://github.com/TheAlphamerc/Luna/wiki/Gettings-Started) 
-
-## Структура директорий
-<details>
-     <summary> Спойлер </summary>
-  
-```
-|-- lib
-|   |-- helper
-|   |   |-- constant.dart
-|   |   |-- customRoute.dart
-|   |   |-- enum.dart
-|   |   |-- routes.dart
-|   |   |-- theme.dart
-|   |   |-- utility.dart
-|   |   '-- validator.dart
-|   |-- main.dart
-|   |-- model
-|   |   |-- chatModel.dart
-|   |   |-- feedModel.dart
-|   |   |-- notificationModel.dart
-|   |   '-- user.dart
-|   |-- page
-|   |   |-- Auth
-|   |   |   |-- forgetPasswordPage.dart
-|   |   |   |-- selectAuthMethod.dart
-|   |   |   |-- signin.dart
-|   |   |   |-- signup.dart
-|   |   |   |-- verifyEmail.dart
-|   |   |   '-- widget
-|   |   |       '-- googleLoginButton.dart
-|   |   |-- common
-|   |   |   |-- sidebar.dart
-|   |   |   |-- splash.dart
-|   |   |   |-- usersListPage.dart
-|   |   |   '-- widget
-|   |   |       '-- userListWidget.dart
-|   |   |-- feed
-|   |   |   |-- composeTweet
-|   |   |   |   |-- composeTweet.dart
-|   |   |   |   |-- state
-|   |   |   |   |   '-- composeTweetState.dart
-|   |   |   |   '-- widget
-|   |   |   |       |-- composeBottomIconWidget.dart
-|   |   |   |       |-- composeTweetImage.dart
-|   |   |   |       '-- widgetView.dart
-|   |   |   |-- feedPage.dart
-|   |   |   |-- feedPostDetail.dart
-|   |   |   '-- imageViewPage.dart
-|   |   |-- homePage.dart
-|   |   |-- message
-|   |   |   |-- chatListPage.dart
-|   |   |   |-- chatScreenPage.dart
-|   |   |   |-- conversationInformation
-|   |   |   |   '-- conversationInformation.dart
-|   |   |   '-- newMessagePage.dart
-|   |   |-- notification
-|   |   |   '-- notificationPage.dart
-|   |   |-- profile
-|   |   |   |-- EditProfilePage.dart
-|   |   |   |-- follow
-|   |   |   |   |-- followerListPage.dart
-|   |   |   |   '-- followingListPage.dart
-|   |   |   |-- profileImageView.dart
-|   |   |   |-- profilePage.dart
-|   |   |   '-- widgets
-|   |   |       '-- tabPainter.dart
-|   |   |-- search
-|   |   |   '-- SearchPage.dart
-|   |   '-- settings
-|   |       |-- accountSettings
-|   |       |   |-- about
-|   |       |   |   '-- aboutTwitter.dart
-|   |       |   |-- accessibility
-|   |       |   |   '-- accessibility.dart
-|   |       |   |-- accountSettingsPage.dart
-|   |       |   |-- contentPrefrences
-|   |       |   |   |-- contentPreference.dart
-|   |       |   |   '-- trends
-|   |       |   |       '-- trendsPage.dart
-|   |       |   |-- dataUsage
-|   |       |   |   '-- dataUsagePage.dart
-|   |       |   |-- displaySettings
-|   |       |   |   '-- displayAndSoundPage.dart
-|   |       |   |-- notifications
-|   |       |   |   '-- notificationPage.dart
-|   |       |   |-- privacyAndSafety
-|   |       |   |   |-- directMessage
-|   |       |   |   |   '-- directMessage.dart
-|   |       |   |   '-- privacyAndSafetyPage.dart
-|   |       |   '-- proxy
-|   |       |       '-- proxyPage.dart
-|   |       |-- settingsAndPrivacyPage.dart
-|   |       '-- widgets
-|   |           |-- headerWidget.dart
-|   |           |-- settingsAppbar.dart
-|   |           '-- settingsRowWidget.dart
-|   |-- state
-|   |   |-- appState.dart
-|   |   |-- authState.dart
-|   |   |-- chats
-|   |   |   '-- chatState.dart
-|   |   |-- feedState.dart
-|   |   |-- notificationState.dart
-|   |   '-- searchState.dart
-|   '-- widgets
-|       |-- bottomMenuBar
-|       |   |-- HalfPainter.dart
-|       |   |-- bottomMenuBar.dart
-|       |   '-- tabItem.dart
-|       |-- customAppBar.dart
-|       |-- customWidgets.dart
-|       |-- newWidget
-|       |   |-- customClipper.dart
-|       |   |-- customLoader.dart
-|       |   |-- customProgressbar.dart
-|       |   |-- customUrlText.dart
-|       |   |-- emptyList.dart
-|       |   |-- rippleButton.dart
-|       |   '-- title_text.dart
-|       '-- tweet
-|           |-- tweet.dart
-|           '-- widgets
-|               |-- parentTweet.dart
-|               |-- retweetWidget.dart
-|               |-- tweetBottomSheet.dart
-|               |-- tweetIconsRow.dart
-|               |-- tweetImage.dart
-|               '-- unavailableTweet.dart
-|-- pubspec.yaml
-```
-
-</details>
-     
-## Поддержка
-
-Советую поддерживать авторский репозиторий - [contribution guide](https://github.com/TheAlphamerc/Luna/blob/master/CONTRIBUTING.md),
- [pull request](https://github.com/TheAlphamerc/Luna/pulls). Этот ФОРК создан "для себя" и для обучения программированию.
-
-## ПРИЛОЖЕНИЕ СОЗДАНО И РАЗРАБОТАНО:
-
-[Sonu Sharma](https://github.com/TheAlphamerc) ([Twitter](https://www.twitter.com/TheAlphamerc)) ([Youtube](https://www.youtube.com/user/sonusharma045sonu/)) ([Insta](https://www.instagram.com/_sonu_sharma__)) ([Dev.to](https://dev.to/thealphamerc))
-  ![Twitter Follow](https://img.shields.io/twitter/follow/thealphamerc?style=social) 
-
-> Если вам понравился проект, поблагодарите АВТОРА, купив ему чашечку кофе :coffee:
->
-> * [PayPal](https://paypal.me/TheAlphamerc/)
+## Сборка 
+* Инструкции от автора (TheAlphamerc) [Wiki](https://github.com/TheAlphamerc/Luna/wiki/Gettings-Started)
+На чём построен:
+* Flutter 3.13.9
+* Dart 3.1.5
+* Android Studio Giraffe | 2022.3.1 Patch 3
 
 
 ## Контрибуторы этого форка:

@@ -7,10 +7,10 @@
 <a href="https://github.com/Solido/awesome-flutter#top">
    <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" />
 </a>
-
+<!--
 ## Скачать Луну
 <a href="hamystore.web.app"><img height="80" src="https://github.com/hammsterr/Luna/blob/24dc55e6bfd08099585c2cbc96c5257f3c29fd77/assets/images/DownloadOnTheStore.png" alt="Скачать"></a>
-
+-->
 ## Проект
 [Luna ReVanced](https://github.com/users/hammsterr/projects/2)
 

@@ -1,4 +1,4 @@
-## Luna - простая соцсеть  <!--[![GitHub stars](https://img.shields.io/github/stars/hammsterr/Luna?style=social)](https://github.com/login?return_to=%2Fhammsterr%Luna) ![GitHub forks](https://img.shields.io/github/forks/hammsterr/Luna?style=social) -->
+## Luna beta  <!--[![GitHub stars](https://img.shields.io/github/stars/hammsterr/Luna?style=social)](https://github.com/login?return_to=%2Fhammsterr%Luna) ![GitHub forks](https://img.shields.io/github/forks/hammsterr/Luna?style=social) -->
 
 Делитесь чем-то новым, общайтесь и обсуждайте! 
 
